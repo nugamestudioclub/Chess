@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Piece : MonoBehaviour
+public abstract class Piece : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Vector2Int Position { get; private set; }
+
+    public void setPosition(Vector2Int position)
     {
-        
+        Position = position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public abstract List<ChessMove> GetPossibleMoves(Board board);
+
+    public virtual void GameUpdate()
     {
-        
+        return;
     }
 }
