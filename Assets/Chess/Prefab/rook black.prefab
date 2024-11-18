@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4910734159903592}
   - component: {fileID: 33254007894895164}
   - component: {fileID: 23314385035919194}
+  - component: {fileID: -3634345157796825802}
   m_Layer: 0
   m_Name: rook black
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-3634345157796825802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764167493807252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70c38af95f10fa4b96aee7fc0787125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -5,38 +5,94 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Board/Piece Creator")]
 public class PieceCreator : ScriptableObject
 {
-    [SerializeField] private GameObject pawn;
-    [SerializeField] private GameObject knight;
-    [SerializeField] private GameObject bishop;
-    [SerializeField] private GameObject rook;
-    [SerializeField] private GameObject queen;
-    [SerializeField] private GameObject king;
-    public GameObject createPiece(PieceType pt, Transform parent)
+    [SerializeField] private GameObject bPawn;
+    [SerializeField] private GameObject bKnight;
+    [SerializeField] private GameObject bBishop;
+    [SerializeField] private GameObject bRook;
+    [SerializeField] private GameObject bQueen;
+    [SerializeField] private GameObject bKing;
+
+    [SerializeField] private GameObject wPawn;
+    [SerializeField] private GameObject wKnight;
+    [SerializeField] private GameObject wBishop;
+    [SerializeField] private GameObject wRook;
+    [SerializeField] private GameObject wQueen;
+    [SerializeField] private GameObject wKing;
+    public GameObject CreatePiece(PieceType pt, Transform parent, TeamColor tc)
     {
         GameObject pieceToSpawn;
 
         switch (pt)
         {
             case PieceType.Pawn:
-                pieceToSpawn = pawn;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bPawn;
+                }
+                else
+                {
+                    pieceToSpawn = wPawn;
+                }
                 break;
             case PieceType.Bishop:
-                pieceToSpawn = bishop;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bBishop;
+                }
+                else
+                {
+                    pieceToSpawn = wBishop;
+                }
                 break;
             case PieceType.Knight:
-                pieceToSpawn = knight;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bKnight;
+                }
+                else
+                {
+                    pieceToSpawn = wKnight;
+                }
                 break;
             case PieceType.Rook:
-                pieceToSpawn = rook;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bRook;
+                }
+                else
+                {
+                    pieceToSpawn = wRook;
+                }
                 break;
             case PieceType.Queen:
-                pieceToSpawn = queen;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bQueen;
+                }
+                else
+                {
+                    pieceToSpawn = wQueen;
+                }
                 break;
             case PieceType.King:
-                pieceToSpawn = king;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bKing;
+                }
+                else
+                {
+                    pieceToSpawn = wKing;
+                }
                 break;
             default:
-                pieceToSpawn = pawn;
+                if (tc == TeamColor.Black)
+                {
+                    pieceToSpawn = bPawn;
+                }
+                else
+                {
+                    pieceToSpawn = wPawn;
+                }
                 break;
         }
 

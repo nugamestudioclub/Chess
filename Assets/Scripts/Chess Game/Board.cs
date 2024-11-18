@@ -8,16 +8,16 @@ public class Board : MonoBehaviour
     const int EMPTY_SPACE = -1;
 
     [SerializeField] private PieceCreator pieceCreator;
+    [SerializeField] private BoardLayout layout;
 
-    [SerializeField] public int Width { get; private set; }
-    [SerializeField] public int Height { get; private set; }
-
+    [SerializeField] public int Width;
+    [SerializeField] public int Height;
     private List<int> pieceIDGrid;
     private List<Piece> pieces;
 
     public void Start()
     {
-        
+        StartGame();
     }
 
     #region gameloop
@@ -28,6 +28,12 @@ public class Board : MonoBehaviour
     public void StartGame()
     {
         pieceIDGrid = Enumerable.Repeat(EMPTY_SPACE, Width * Height).ToList();
+        pieces = new List<Piece>();
+
+        foreach (BoardLayout.BoardSquareSetup setup in layout.SetupArray)
+        {
+            AddPiece(setup.pieceType, setup.position, setup.teamColor);
+        }
     }
 
     public void UpdateGame()
@@ -56,13 +62,13 @@ public class Board : MonoBehaviour
 
     #endregion
 
-    public bool AddPiece(PieceType pt, Vector2Int position)
+    public bool AddPiece(PieceType pt, Vector2Int position, TeamColor tc)
     {
         if (HasPiece(position)) return false;
 
-        GameObject pieceObject = pieceCreator.createPiece(pt, transform);
+        GameObject pieceObject = pieceCreator.CreatePiece(pt, transform, tc);
         Piece piece = pieceObject.GetComponent<Piece>();
-        piece.setPosition(position);
+        piece.SetPosition(position);
         pieces.Add(piece);
         
         SetPieceGridID(pieces.Count - 1, position);
@@ -76,7 +82,7 @@ public class Board : MonoBehaviour
 
         SetPieceGridID(EMPTY_SPACE, pieces[id].Position);
         SetPieceGridID(id, position);
-        pieces[id].setPosition(position);
+        pieces[id].SetPosition(position);
     }
 
     public void RemovePiece(Vector2Int position)
@@ -96,7 +102,28 @@ public class Board : MonoBehaviour
 
     private void SetPieceGridID(int id, Vector2Int position) => pieceIDGrid[GetFlat(position)] = id;
 
-    public int GetPieceID(Vector2Int position) => pieceIDGrid[GetFlat(position)];
+    public int GetPieceID(Vector2Int position)
+    {
+        Debug.Log(position);
+        return pieceIDGrid[GetFlat(position)];
+    }
 
     public int GetFlat(Vector2Int position) => position.x + (position.y * Width);
+
+    public Vector2Int Get2D(int location) => new Vector2Int(location % Width, location / Width);
+
+    public bool ContainsPosition(Vector2Int position)
+    {
+        if (position.x < 0 || position.x >= Width)
+        {
+            return false;
+        }
+
+        if (position.y < 0 || position.y >= Height)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -7,7 +7,7 @@ public class BoardLayout : ScriptableObject
 {
     
     [System.Serializable]
-    private class BoardSquareSetup
+    public class BoardSquareSetup
     {
         public Vector2Int position;
         public PieceType pieceType;
@@ -56,4 +56,6 @@ public class BoardLayout : ScriptableObject
         }
         return boardSquares[index].teamColor;
     }
+
+    public BoardSquareSetup[] SetupArray => boardSquares;
 }

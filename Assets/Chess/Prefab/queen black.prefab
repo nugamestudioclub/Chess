@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4568170227099380}
   - component: {fileID: 33643743512923556}
   - component: {fileID: 23947800390871528}
+  - component: {fileID: 600773196835539144}
   m_Layer: 0
   m_Name: queen black
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &600773196835539144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996616484037168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9020c350b88a0a42a400ad96bddd4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

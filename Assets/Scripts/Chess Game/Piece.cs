@@ -6,12 +6,17 @@ public abstract class Piece : MonoBehaviour
 {
     public Vector2Int Position { get; private set; }
 
-    public void setPosition(Vector2Int position)
+    public void SetPosition(Vector2Int position)
     {
         Position = position;
     }
 
-    public abstract List<ChessMove> GetPossibleMoves(Board board);
+    public virtual List<ChessMove> GetPossibleMoves(Board board)
+    {
+        return GetDefaultMoves(board);
+    }
+
+    public abstract List<ChessMove> GetDefaultMoves(Board board);
 
     public virtual void GameUpdate()
     {
