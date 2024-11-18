@@ -109,7 +109,6 @@
 -define:ENABLE_UNITY_COLLECTIONS_CHECKS
 -define:ENABLE_BURST_AOT
 -define:UNITY_TEAM_LICENSE
--define:UNITY_PRO_LICENSE
 -define:ENABLE_CUSTOM_RENDER_TEXTURE
 -define:ENABLE_DIRECTOR
 -define:ENABLE_LOCALIZATION
@@ -356,6 +355,7 @@
 "Assets/Scripts/Chess Game/Board.cs"
 "Assets/Scripts/Chess Game/BoardLayout.cs"
 "Assets/Scripts/Chess Game/ChessGameController.cs"
+"Assets/Scripts/Chess Game/ChessMove.cs"
 "Assets/Scripts/Chess Game/ChessPlayer.cs"
 "Assets/Scripts/Chess Game/Piece.cs"
 "Assets/Scripts/Chess Game/PieceCreator.cs"
