@@ -34,7 +34,7 @@ public class Board : MonoBehaviour
 
         foreach (BoardLayout.BoardSquareSetup setup in layout.SetupArray)
         {
-            AddPiece(setup.pieceType, setup.position, setup.teamColor);
+            AddPiece(setup.pieceType, setup.position - new Vector2Int(1, 1), setup.teamColor);
         }
     }
 
