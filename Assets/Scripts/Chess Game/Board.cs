@@ -7,6 +7,8 @@ public class Board : MonoBehaviour
 {
     const int EMPTY_SPACE = -1;
 
+    const int TILE_TO_VECT = 2;
+
     [SerializeField] private PieceCreator pieceCreator;
     [SerializeField] private BoardLayout layout;
 
@@ -69,11 +71,19 @@ public class Board : MonoBehaviour
         GameObject pieceObject = pieceCreator.CreatePiece(pt, transform, tc);
         Piece piece = pieceObject.GetComponent<Piece>();
         piece.SetPosition(position);
+        Debug.Log(position);
+        piece.transform.position = PosToVect(position);
         pieces.Add(piece);
         
         SetPieceGridID(pieces.Count - 1, position);
 
         return true;
+    }
+
+    public Vector3 PosToVect(Vector2Int pos)
+    {
+        Vector3 ret = new Vector3(pos.x * 2.55f - 11.2f, 1.8f, pos.y * 2.6f - 12f);
+        return ret;
     }
 
     public void SetPiecePosition(int id, Vector2Int position)
@@ -104,7 +114,6 @@ public class Board : MonoBehaviour
 
     public int GetPieceID(Vector2Int position)
     {
-        Debug.Log(position);
         return pieceIDGrid[GetFlat(position)];
     }
 

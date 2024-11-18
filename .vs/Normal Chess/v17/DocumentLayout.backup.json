@@ -3,11 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\brett\\Normal Chess\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A97DAE8E-7037-DCEC-DD8C-4EF97CF5EED7}|Assembly-CSharp.csproj|c:\\users\\brett\\normal chess\\assets\\scripts\\enums\\teamcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A97DAE8E-7037-DCEC-DD8C-4EF97CF5EED7}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enums\\teamcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A97DAE8E-7037-DCEC-DD8C-4EF97CF5EED7}|Assembly-CSharp.csproj|c:\\users\\brett\\normal chess\\assets\\scripts\\chess game\\boardlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A97DAE8E-7037-DCEC-DD8C-4EF97CF5EED7}|Assembly-CSharp.csproj|C:\\Users\\brett\\Normal Chess\\assets\\scripts\\chess game\\boardlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A97DAE8E-7037-DCEC-DD8C-4EF97CF5EED7}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chess game\\boardlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -23,25 +19,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TeamColor.cs",
-              "DocumentMoniker": "C:\\Users\\brett\\Normal Chess\\Assets\\Scripts\\Enums\\TeamColor.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enums\\TeamColor.cs",
-              "ToolTip": "C:\\Users\\brett\\Normal Chess\\Assets\\Scripts\\Enums\\TeamColor.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enums\\TeamColor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T00:23:40.883Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "BoardLayout.cs",
               "DocumentMoniker": "C:\\Users\\brett\\Normal Chess\\Assets\\Scripts\\Chess Game\\BoardLayout.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Chess Game\\BoardLayout.cs",
               "ToolTip": "C:\\Users\\brett\\Normal Chess\\Assets\\Scripts\\Chess Game\\BoardLayout.cs",
               "RelativeToolTip": "Assets\\Scripts\\Chess Game\\BoardLayout.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-21T01:26:12.891Z",
               "EditorCaption": ""
