@@ -82,7 +82,7 @@ public class Board : MonoBehaviour
 
     public Vector3 PosToVect(Vector2Int pos)
     {
-        Vector3 ret = new Vector3(pos.x * 2.55f - 11.2f, 1.8f, pos.y * 2.6f - 12f);
+        Vector3 ret = new Vector3(pos.x * 2.55f - 8.8f, 1.8f, pos.y * 2.55f - 9.5f);
         return ret;
     }
 
