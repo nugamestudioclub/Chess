@@ -6,27 +6,21 @@ public class Bishop : Piece
 {
     public override List<ChessMove> GetDefaultMoves(Board board)
     {
+        return GetDiagonalMoves(board, Position, teamColor);
+    }
+
+    public static List<ChessMove> GetDiagonalMoves(Board board, Vector2Int position, TeamColor teamColor)
+    {
         Vector2Int diagonal1 = Vector2Int.right + Vector2Int.up;
         Vector2Int diagonal2 = Vector2Int.right + Vector2Int.down;
 
-        return new List<ChessMove>();
-    }
+        List<ChessMove> moves = new List<ChessMove>();
 
-    private void appendDiagonal(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board, List<Vector2Int> path)
-    {
-        Vector2Int checkPos = pos + (diagonal * step);
+        AppendLine(position, diagonal1, 1, moves, board, teamColor);
+        AppendLine(position, diagonal1 * -1, 1, moves, board, teamColor);
+        AppendLine(position, diagonal2, 1, moves, board, teamColor);
+        AppendLine(position, diagonal2 * -1, 1, moves, board, teamColor);
 
-        if (!board.ContainsPosition(checkPos))
-        {
-            return;
-        }
-
-        ChessMove move = new ChessMove()
-        {
-            origin = Position,
-            destination = checkPos,
-            pathSteps = path
-        };
-
+        return moves;
     }
 }

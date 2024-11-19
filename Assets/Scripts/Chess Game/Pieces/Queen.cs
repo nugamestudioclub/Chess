@@ -6,6 +6,10 @@ public class Queen : Piece
 {
     public override List<ChessMove> GetDefaultMoves(Board board)
     {
-        throw new System.NotImplementedException();
+        var bishopMoves = Bishop.GetDiagonalMoves(board, Position, teamColor);
+
+        bishopMoves.AddRange(Rook.GetRookMoves(board, Position, teamColor));
+
+        return bishopMoves;
     }
 }

@@ -7,10 +7,9 @@ public class Board : MonoBehaviour
 {
     const int EMPTY_SPACE = -1;
 
-    const int TILE_TO_VECT = 2;
-
     [SerializeField] private PieceCreator pieceCreator;
     [SerializeField] private BoardLayout layout;
+    [SerializeField] private SquareSelectorCreator squareCreator;
 
     [SerializeField] public int Width;
     [SerializeField] public int Height;
@@ -36,21 +35,34 @@ public class Board : MonoBehaviour
         {
             AddPiece(setup.pieceType, setup.position - new Vector2Int(1, 1), setup.teamColor);
         }
+
+        squareCreator.CreateSquareSelectors(this);
     }
 
     public void UpdateGame()
     {
         foreach (Piece piece in pieces)
         {
-            piece.GameUpdate();
+            if (piece != null)
+            {
+                piece.GameUpdate();
+            }
         }
     }
 
-    public bool SendMove(TeamColor tc, Piece piece, ChessMove move)
+    public bool SendMove(TeamColor tc, Piece piece, ChessMove move, ChessPlayer sender = null)
     {
-        if (tc != activePlayer || gameOver) return false;
+        if (tc != activePlayer || gameOver)
+        {
+            Debug.Log("wrong player");
+            return false;
+        }
+
+        Debug.Log(tc + " " + activePlayer);
 
         SetPiecePosition(GetPieceID(piece.Position), move.destination);
+
+        piece.hasMoved = true;
 
         // if piece captured king
 
@@ -58,6 +70,13 @@ public class Board : MonoBehaviour
 
         activePlayer = activePlayer == TeamColor.White ? TeamColor.Black : TeamColor.White;
         UpdateGame();
+
+        if (sender != null)
+        {
+            sender.Switch();
+        }
+
+        StartCoroutine(FlipBoard());
 
         return true;
     }
@@ -70,9 +89,9 @@ public class Board : MonoBehaviour
 
         GameObject pieceObject = pieceCreator.CreatePiece(pt, transform, tc);
         Piece piece = pieceObject.GetComponent<Piece>();
-        piece.SetPosition(position);
+        piece.SetPosition(position, PosToVect(position));
+        piece.teamColor = tc;
         Debug.Log(position);
-        piece.transform.position = PosToVect(position);
         pieces.Add(piece);
         
         SetPieceGridID(pieces.Count - 1, position);
@@ -82,7 +101,7 @@ public class Board : MonoBehaviour
 
     public Vector3 PosToVect(Vector2Int pos)
     {
-        Vector3 ret = new Vector3(pos.x * 2.55f - 8.8f, 1.8f, pos.y * 2.55f - 9.5f);
+        Vector3 ret = new Vector3(pos.x * 2.55f - 8.75f, 1.8f, pos.y * 2.55f - 9.5f);
         return ret;
     }
 
@@ -92,14 +111,18 @@ public class Board : MonoBehaviour
 
         SetPieceGridID(EMPTY_SPACE, pieces[id].Position);
         SetPieceGridID(id, position);
-        pieces[id].SetPosition(position);
+
+        Vector3 temp = transform.eulerAngles + Vector3.zero;
+        transform.eulerAngles = new Vector3(0, 0, 0);
+        pieces[id].SetPosition(position, PosToVect(position));
+        transform.eulerAngles = temp;
     }
 
     public void RemovePiece(Vector2Int position)
     {
         int id = GetPieceID(position);
-        pieces[id] = null;
         Destroy(pieces[id].gameObject);
+        pieces[id] = null;
     }
 
     public Piece GetPiece(Vector2Int position)
@@ -134,5 +157,18 @@ public class Board : MonoBehaviour
         }
 
         return true;
+    }
+
+    IEnumerator FlipBoard()
+    {
+        float initialYRot = transform.eulerAngles.y;
+        float offsetY = 0;
+
+        while (offsetY < 180)
+        {
+            offsetY = Mathf.Min(180, offsetY + 100f * Time.deltaTime);
+            transform.eulerAngles = new Vector3(transform.rotation.x, initialYRot + offsetY, transform.rotation.z);
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

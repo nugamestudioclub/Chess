@@ -90,7 +90,7 @@ MonoBehaviour:
     teamColor: 0
   - position: {x: 2, y: 7}
     pieceType: 0
-    teamColor: 1
+    teamColor: 0
   - position: {x: 3, y: 7}
     pieceType: 0
     teamColor: 0
