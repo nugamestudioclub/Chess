@@ -166,7 +166,7 @@ public class Board : MonoBehaviour
 
         while (offsetY < 180)
         {
-            offsetY = Mathf.Min(180, offsetY + 100f * Time.deltaTime);
+            offsetY = Mathf.Min(180, offsetY + 300f * Time.deltaTime);
             transform.eulerAngles = new Vector3(transform.rotation.x, initialYRot + offsetY, transform.rotation.z);
             yield return new WaitForEndOfFrame();
         }

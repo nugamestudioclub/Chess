@@ -42,6 +42,7 @@ public class ChessPlayer : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
+
         // Perform raycast
 
         RaycastHit hit;
