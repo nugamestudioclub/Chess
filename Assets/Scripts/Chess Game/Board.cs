@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,22 @@ public class Board : MonoBehaviour
     [SerializeField] private BoardLayout layout;
     [SerializeField] private SquareSelectorCreator squareCreator;
 
+    public void SetActivePlayer(TeamColor value)
+    {
+        activePlayer = value;
+    }
+
+    public void SetGameOver(bool value)
+    {
+        gameOver = value;
+    }
+
     [SerializeField] public int Width;
     [SerializeField] public int Height;
     private List<int> pieceIDGrid;
-    private List<Piece> pieces;
 
+    private List<Piece> pieces;
+    public List<Piece> Pieces => pieces;
     public void Start()
     {
         StartGame();
@@ -23,8 +35,11 @@ public class Board : MonoBehaviour
 
     #region gameloop
 
-    TeamColor activePlayer = TeamColor.White;
-    bool gameOver = false;
+    ChessController mainController;
+    ChessController activeController;
+
+    public TeamColor activePlayer = TeamColor.White;
+    public bool gameOver = false;
 
     public void StartGame()
     {
@@ -37,48 +52,32 @@ public class Board : MonoBehaviour
         }
 
         squareCreator.CreateSquareSelectors(this);
+
+        mainController = new ChessController(this);
+        activeController = mainController;
     }
 
     public void UpdateGame()
     {
-        foreach (Piece piece in pieces)
-        {
-            if (piece != null)
-            {
-                piece.GameUpdate();
-            }
-        }
+        activeController.UpdateGame();
     }
 
+    // returns whether or not move was made
     public bool SendMove(TeamColor tc, Piece piece, ChessMove move, ChessPlayer sender = null)
     {
-        if (tc != activePlayer || gameOver)
-        {
-            Debug.Log("wrong player");
-            return false;
-        }
+        return activeController.SendMove(tc, piece, move, sender);
+    }
 
-        Debug.Log(tc + " " + activePlayer);
+    public void Update()
+    {
+        activeController.OnUpdate();
+    }
 
-        SetPiecePosition(GetPieceID(piece.Position), move.destination);
-
-        piece.hasMoved = true;
-
-        // if piece captured king
-
-        // else:
-
-        activePlayer = activePlayer == TeamColor.White ? TeamColor.Black : TeamColor.White;
-        UpdateGame();
-
-        if (sender != null)
-        {
-            sender.Switch();
-        }
-
-        StartCoroutine(FlipBoard());
-
-        return true;
+    private void SetController(ChessController controller)
+    {
+        activeController.OnStart();
+        activeController = controller;
+        activeController.OnEnd();
     }
 
     #endregion
@@ -159,16 +158,33 @@ public class Board : MonoBehaviour
         return true;
     }
 
-    IEnumerator FlipBoard()
+    public IEnumerator FlipBoard()
     {
         float initialYRot = transform.eulerAngles.y;
         float offsetY = 0;
+        float offsetControl = 0;
 
-        while (offsetY < 180)
+        while (offsetControl <= 1)
         {
-            offsetY = Mathf.Min(180, offsetY + 300f * Time.deltaTime);
+            offsetControl += Time.deltaTime;
+            offsetY = EaseInOutQuint(offsetControl) * 180;
             transform.eulerAngles = new Vector3(transform.rotation.x, initialYRot + offsetY, transform.rotation.z);
             yield return new WaitForEndOfFrame();
         }
+
+        transform.eulerAngles = new Vector3(transform.rotation.x, initialYRot + 180f, transform.rotation.z);
+    }
+
+    float EaseInOutQuint(float x)
+    {
+        float c5 = (2 * Mathf.PI) / 4.5f;
+
+        return x == 0
+          ? 0
+          : x == 1
+          ? 1
+          : x < 0.5
+          ? -(Mathf.Pow(2, 20 * x - 10) * Mathf.Sin((20 * x - 11.125f) * c5)) / 2
+          : (Mathf.Pow(2, -20 * x + 10) * Mathf.Sin((20 * x - 11.125f) * c5)) / 2 + 1;
     }
 }
