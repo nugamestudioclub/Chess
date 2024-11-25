@@ -7,6 +7,9 @@ public class ChessPlayer : MonoBehaviour
     Board board;
 
     Vector2Int selectedLocation;
+    Piece hoveredPiece;
+    Piece selectedPiece;
+    public Vector2Int hoverPos;
     bool selected = false;
 
     List<ChessMove> potentialMoves;
@@ -27,6 +30,38 @@ public class ChessPlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             HandleMouse();
+        }
+        HoverMouse();
+    }
+
+    private void HoverMouse()
+    {
+
+        // Get mouse position
+        Vector3 mousePosition = Input.mousePosition;
+
+
+        // Create a ray from the mouse position
+
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+
+        // Perform raycast
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
+        {
+
+            var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
+
+            if (selector == null)
+            {
+                return;
+            }
+
+            Vector2Int hoverCoords = selector.position;
+            this.hoveredPiece = this.board.GetPiece(hoverCoords);
         }
     }
 
@@ -60,12 +95,12 @@ public class ChessPlayer : MonoBehaviour
             if (selected == false)
             {
                 Debug.Log("new selected");
-                HandleNewSelecection(selector.position);
+                //HandleNewSelecection(selector.position);
             } 
             else
             {
                 Debug.Log("selected");
-                HandleCurrentlySelected(selector.position);
+                //HandleCurrentlySelected(selector.position);
             }
         }
         else
