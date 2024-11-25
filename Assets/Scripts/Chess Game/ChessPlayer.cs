@@ -8,10 +8,13 @@ public class ChessPlayer : MonoBehaviour
 
     Vector2Int selectedLocation;
     bool selected = false;
+    Piece hoveredPiece;
 
     List<ChessMove> potentialMoves;
 
     TeamColor teamColor = TeamColor.White;
+
+    public Vector2Int hoverPos;
 
     private void Awake()
     {
@@ -27,6 +30,39 @@ public class ChessPlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             HandleMouse();
+        }
+        HoverMouse();
+    }
+
+    private void HoverMouse()
+    {
+
+        // Get mouse position
+        Vector3 mousePosition = Input.mousePosition;
+
+
+        // Create a ray from the mouse position
+
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+
+        // Perform raycast
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
+        {
+
+            var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
+
+            if (selector == null)
+            {
+                return;
+            }
+
+            Vector2Int hoverCoords = selector.position;
+            this.hoverPos = hoverCoords;
+            this.hoveredPiece = this.board.GetPiece(hoverCoords);
         }
     }
 
