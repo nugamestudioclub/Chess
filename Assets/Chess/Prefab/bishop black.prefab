@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33017829115479750}
   - component: {fileID: 23471427938731296}
   - component: {fileID: -4764256358932965646}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: bishop black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,4 +96,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce805e95db9f07c4798ffca957fb7039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasMoved: 0

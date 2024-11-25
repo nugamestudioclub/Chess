@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33785817432066812}
   - component: {fileID: 23056748769021182}
   - component: {fileID: 4782340337987385154}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: rook white
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,4 +96,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70c38af95f10fa4b96aee7fc0787125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasMoved: 0

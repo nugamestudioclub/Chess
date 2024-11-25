@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33897457938783466}
   - component: {fileID: 23986310822093114}
   - component: {fileID: -6172303781236962406}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: king black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,4 +96,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aed137ad67eb7f4f9c9d19d34fadfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasMoved: 0

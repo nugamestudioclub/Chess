@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33146442824295622}
   - component: {fileID: 23812868346385688}
   - component: {fileID: -6877079653434982183}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: pawn white
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,4 +96,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2cea559a64bbb4ebf25f45fd2a55bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasMoved: 0
