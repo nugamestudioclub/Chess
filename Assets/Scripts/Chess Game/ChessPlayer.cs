@@ -11,6 +11,7 @@ public class ChessPlayer : MonoBehaviour
     Vector2Int selectedLocation;
     bool selected = false;
     public Piece hoveredPiece;
+    public Piece selectedPiece;
 
     List<ChessMove> potentialMoves;
 
@@ -33,16 +34,17 @@ public class ChessPlayer : MonoBehaviour
         {
             HandleMouse();
         }
+        /*
+        foreach (Piece piece in this.board.Pieces)
+        {
+            piece.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
+        }
+        */
         HoverMouse();
     }
 
     private void HoverMouse()
     {
-
-        foreach (Piece piece in this.board.Pieces)
-        {
-            piece.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
-        }
 
         // Get mouse position
         Vector3 mousePosition = Input.mousePosition;
@@ -59,6 +61,13 @@ public class ChessPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
         {
+            foreach (Piece piece in this.board.Pieces)
+            {
+                if (piece != this.selectedPiece)
+                {
+                    piece.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
+                }
+            }
 
             var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
 
@@ -94,7 +103,11 @@ public class ChessPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
         {
-            Debug.Log("raycast hit");
+
+            foreach (Piece piece in this.board.Pieces)
+            {
+                piece.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
+            }
 
             var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
             if (selector == null)
@@ -112,11 +125,15 @@ public class ChessPlayer : MonoBehaviour
                 Debug.Log("selected");
                 HandleCurrentlySelected(selector.position);
             }
+
+            this.selectedPiece = this.board.GetPiece(selector.position);
+            this.selectedPiece.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 90));
         }
         else
         {
             ClearSelection();
         }
+        
     }
 
     private void HandleNewSelecection(Vector2Int pos)
@@ -162,9 +179,12 @@ public class ChessPlayer : MonoBehaviour
         {
             if (move.destination == pos)
             {
+
                 //board.SetPiecePosition(board.GetPieceID(selectedLocation), pos);
 
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), move, this);
+
+                this.selectedPiece = null;
 
                 ClearSelection();
 
@@ -178,6 +198,7 @@ public class ChessPlayer : MonoBehaviour
     private void ClearSelection()
     {
         selected = false;
+        this.selectedPiece = null;
         potentialMoves.Clear();
         selectedLocation = new Vector2Int(-1, -1);
     }
