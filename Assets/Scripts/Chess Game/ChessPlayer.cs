@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ChessPlayer : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class ChessPlayer : MonoBehaviour
 
     Vector2Int selectedLocation;
     bool selected = false;
-    Piece hoveredPiece;
+    public Piece hoveredPiece;
 
     List<ChessMove> potentialMoves;
 
@@ -37,6 +39,11 @@ public class ChessPlayer : MonoBehaviour
     private void HoverMouse()
     {
 
+        foreach (Piece piece in this.board.Pieces)
+        {
+            piece.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
+        }
+
         // Get mouse position
         Vector3 mousePosition = Input.mousePosition;
 
@@ -63,6 +70,8 @@ public class ChessPlayer : MonoBehaviour
             Vector2Int hoverCoords = selector.position;
             this.hoverPos = hoverCoords;
             this.hoveredPiece = this.board.GetPiece(hoverCoords);
+            var hoveredPieceMat = this.hoveredPiece.GetComponent<Renderer>().material;
+            hoveredPieceMat.SetFloat("_Alpha", 1.0f);
         }
     }
 

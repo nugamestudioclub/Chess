@@ -12,7 +12,6 @@ public class SquareSelectorCreator : MonoBehaviour
         {
             for (int y = 0; y < board.Height; y++)
             {
-                // wait a quarter of a second
                 StartCoroutine(CreateSquareDelay(board, x, y));
             }
         }
@@ -27,6 +26,7 @@ public class SquareSelectorCreator : MonoBehaviour
     public void CreateSquareSelector(Board board, Vector2Int position)
     {
         GameObject selector = Instantiate(squarePrefab);
+
         selector.transform.parent = board.gameObject.transform;
 
         selector.transform.position = board.PosToVect(position);
