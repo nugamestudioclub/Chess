@@ -34,12 +34,6 @@ public class ChessPlayer : MonoBehaviour
         {
             HandleMouse();
         }
-        /*
-        foreach (Piece piece in this.board.Pieces)
-        {
-            piece.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
-        }
-        */
         HoverMouse();
     }
 
@@ -61,32 +55,55 @@ public class ChessPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
         {
-            foreach (Piece piece in this.board.Pieces)
-            {
-                if (piece != this.selectedPiece)
-                {
-                    piece.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
-                }
-            }
 
             var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
 
             if (selector == null)
             {
+                foreach (Piece piece in board.Pieces)
+                {
+                    piece.hovered = false;
+                }
                 return;
             }
 
             Vector2Int hoverCoords = selector.position;
             this.hoverPos = hoverCoords;
             this.hoveredPiece = this.board.GetPiece(hoverCoords);
-            var hoveredPieceMat = this.hoveredPiece.GetComponent<Renderer>().material;
-            hoveredPieceMat.SetFloat("_Alpha", 1.0f);
+            if (hoveredPiece == null)
+            {
+                foreach (Piece piece in board.Pieces)
+                {
+                    piece.hovered = false;
+                }
+                return;
+            }
+            this.hoveredPiece.hovered = true;
+            foreach (Piece piece in board.Pieces)
+            {
+                if (piece != this.hoveredPiece)
+                {
+                    piece.hovered = false;
+                }
+            }
+        }
+        else
+        {
+            foreach (Piece piece in board.Pieces)
+            {
+                piece.hovered = false;
+            }
         }
     }
 
     private void HandleMouse()
     {
         Debug.Log("mouse down");
+
+        foreach (Piece piece in board.Pieces)
+        {
+            piece.selected = false;
+        }
 
         // Get mouse position
         Vector3 mousePosition = Input.mousePosition;
@@ -103,11 +120,6 @@ public class ChessPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
         {
-
-            foreach (Piece piece in this.board.Pieces)
-            {
-                piece.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
-            }
 
             var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
             if (selector == null)
@@ -127,7 +139,14 @@ public class ChessPlayer : MonoBehaviour
             }
 
             this.selectedPiece = this.board.GetPiece(selector.position);
-            this.selectedPiece.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 90));
+            this.selectedPiece.selected = true;
+            foreach (Piece piece in board.Pieces)
+            {
+                if (piece != this.selectedPiece)
+                {
+                    piece.selected = false;
+                }
+            }
         }
         else
         {
@@ -198,6 +217,7 @@ public class ChessPlayer : MonoBehaviour
     private void ClearSelection()
     {
         selected = false;
+        this.selectedPiece.selected = false;
         this.selectedPiece = null;
         potentialMoves.Clear();
         selectedLocation = new Vector2Int(-1, -1);

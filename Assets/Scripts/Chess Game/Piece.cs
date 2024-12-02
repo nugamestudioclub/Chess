@@ -9,6 +9,8 @@ public abstract class Piece : MonoBehaviour
     public TeamColor teamColor { get; set; }
 
     public bool hasMoved = false;
+    public bool selected = false;
+    public bool hovered = false;
 
     public void SetPosition(Vector2Int position, Vector3 worldPos)
     {
@@ -26,6 +28,29 @@ public abstract class Piece : MonoBehaviour
     public virtual void GameUpdate()
     {
         return;
+    }
+
+    private void Update()
+    {
+        if (this.hovered)
+        {
+            this.GetComponent<Renderer>().material.SetFloat("_Alpha", 1.0f);
+        }
+        else
+        {
+            this.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
+        }
+
+        if (this.selected)
+        {
+            var hoveredPieceMat = this.GetComponent<Renderer>().material;
+            hoveredPieceMat.SetFloat("_Alpha", 1.0f);
+            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 90));
+        }
+        else
+        {
+            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
+        }
     }
 
     public static void AppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board, TeamColor teamColor)
