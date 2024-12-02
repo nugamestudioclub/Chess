@@ -666,6 +666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1762249435}
   - component: {fileID: 1762249437}
+  - component: {fileID: 1762249439}
   - component: {fileID: 1762249436}
   - component: {fileID: 1762249438}
   m_Layer: 0
@@ -744,6 +745,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac21939aff94cb74d8fd3287038b4535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1762249439
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762249434}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &2063197819
 GameObject:
   m_ObjectHideFlags: 0

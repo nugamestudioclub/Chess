@@ -11,6 +11,7 @@ public class Board : MonoBehaviour
     [SerializeField] private PieceCreator pieceCreator;
     [SerializeField] private BoardLayout layout;
     [SerializeField] private SquareSelectorCreator squareCreator;
+    public bool showPieceInfo = false;
 
     public void SetActivePlayer(TeamColor value)
     {

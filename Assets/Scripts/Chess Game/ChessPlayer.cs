@@ -10,6 +10,7 @@ public class ChessPlayer : MonoBehaviour
 
     Vector2Int selectedLocation;
     bool selected = false;
+    bool hovered = false;
     public Piece hoveredPiece;
     public Piece selectedPiece;
 
@@ -35,6 +36,14 @@ public class ChessPlayer : MonoBehaviour
             HandleMouse();
         }
         HoverMouse();
+        if (this.hovered)
+        {
+            this.board.showPieceInfo = true;
+        }
+        else
+        {
+            this.board.showPieceInfo = false;
+        }
     }
 
     private void HoverMouse()
@@ -72,12 +81,14 @@ public class ChessPlayer : MonoBehaviour
             this.hoveredPiece = this.board.GetPiece(hoverCoords);
             if (hoveredPiece == null)
             {
+                this.hovered = false;
                 foreach (Piece piece in board.Pieces)
                 {
                     piece.hovered = false;
                 }
                 return;
             }
+            this.hovered = true;
             this.hoveredPiece.hovered = true;
             foreach (Piece piece in board.Pieces)
             {
@@ -89,6 +100,7 @@ public class ChessPlayer : MonoBehaviour
         }
         else
         {
+            this.hovered = false;
             foreach (Piece piece in board.Pieces)
             {
                 piece.hovered = false;
