@@ -97,4 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b5a71afd455b44a3beb819350c3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rank: Knight
   hasMoved: 0
+  selected: 0
+  hovered: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ChessPieceDialogueBox : MonoBehaviour
@@ -24,5 +25,6 @@ public class ChessPieceDialogueBox : MonoBehaviour
         {
             this.GetComponent<CanvasGroup>().alpha = 0.0f;
         }
+        //this.GetComponentInChildren<TMP_Text>().SetText("Test");
     }
 }
