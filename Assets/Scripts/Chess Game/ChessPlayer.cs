@@ -13,6 +13,7 @@ public class ChessPlayer : MonoBehaviour
     bool hovered = false;
     public Piece hoveredPiece;
     public Piece selectedPiece;
+    [SerializeField] private PieceManager pieceManager;
 
     List<ChessMove> potentialMoves;
 
@@ -44,6 +45,7 @@ public class ChessPlayer : MonoBehaviour
         {
             this.board.showPieceInfo = false;
         }
+        this.pieceManager.hoveredPiece = this.hoveredPiece;
     }
 
     private void HoverMouse()

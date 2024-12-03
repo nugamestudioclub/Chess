@@ -97,4 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce805e95db9f07c4798ffca957fb7039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rank: Bishop
   hasMoved: 0
+  selected: 0
+  hovered: 0

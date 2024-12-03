@@ -8,6 +8,8 @@ public abstract class Piece : MonoBehaviour
 
     public TeamColor teamColor { get; set; }
 
+    public String rank;
+
     public bool hasMoved = false;
     public bool selected = false;
     public bool hovered = false;

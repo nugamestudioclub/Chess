@@ -97,4 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2cea559a64bbb4ebf25f45fd2a55bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rank: Pawn
   hasMoved: 0
+  selected: 0
+  hovered: 0
