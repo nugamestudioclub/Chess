@@ -270,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoveredPiece: {fileID: 0}
   selectedPiece: {fileID: 0}
+  pieceManager: {fileID: 1751259347}
   hoverPos: {x: 0, y: 0}
 --- !u!1 &705507993
 GameObject:

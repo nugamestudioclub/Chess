@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SquareSelectorCreator : MonoBehaviour
 {
     [SerializeField] private GameObject squarePrefab;
+    [SerializeField] private Material whiteMaterial;
+    [SerializeField] private Material blackMaterial;
+    private int counter = 0;
 
     public void CreateSquareSelectors(Board board)
     {
+        
         for (int x = 0; x < board.Width; x++)
         {
             for (int y = 0; y < board.Height; y++)
             {
+                counter++;
                 StartCoroutine(CreateSquareDelay(board, x, y));
             }
         }
@@ -40,6 +46,15 @@ public class SquareSelectorCreator : MonoBehaviour
         selector.transform.localScale = new Vector3(size.x, .05f, size.z);
 
         var square = selector.AddComponent<SquareSelector>();
+
+        if (counter % 2 == 0)
+        {
+            square.GetComponent<Renderer>().material = whiteMaterial;
+        }
+        else
+        {
+            square.GetComponent<Renderer>().material = blackMaterial;
+        }
 
         square.position = position;
 
