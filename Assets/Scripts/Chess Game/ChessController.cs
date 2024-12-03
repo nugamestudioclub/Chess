@@ -46,6 +46,7 @@ public class ChessController
         Debug.Log(tc + " " + activePlayer);
 
         board.SetPiecePosition(board.GetPieceID(piece.Position), move.destination);
+        piece.statusManager.ApplyOnPieceMove((effect) => effect.Props.OnPieceMove(piece, move));
 
         piece.hasMoved = true;
 
