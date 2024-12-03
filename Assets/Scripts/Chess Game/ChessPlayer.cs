@@ -212,10 +212,23 @@ public class ChessPlayer : MonoBehaviour
         {
             if (move.destination == pos)
             {
-
+                var sentMove = move;
                 //board.SetPiecePosition(board.GetPieceID(selectedLocation), pos);
 
-                board.SendMove(teamColor, board.GetPiece(selectedLocation), move, this);
+                var selPiece = board.GetPiece(selectedLocation);
+
+                if (selPiece.statusManager.HasStatusType<NewHire>())
+                {
+                    var rand = new System.Random();
+
+                    if (rand.NextDouble() > 0.5f)
+                    {
+                        int newMoveIndex = rand.Next(potentialMoves.Count);
+                        sentMove = potentialMoves[newMoveIndex];
+                    }
+                }
+
+                board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
 
                 this.selectedPiece = null;
 

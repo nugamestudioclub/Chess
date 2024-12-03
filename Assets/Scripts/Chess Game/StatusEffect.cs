@@ -4,11 +4,14 @@ using UnityEngine;
 
 public abstract class StatusEffect
 {
-    public StatusEffectSO Props { get; private set; }
+    public StatusEffectSO Props { get; protected set; }
+    protected int id;
+    public int ID => id;
 
-    public StatusEffect(StatusEffectSO props)
+    public StatusEffect(StatusEffectSO props, int id)
     {
         Props = props;
+        this.id = id;
     }
 }
 
@@ -32,10 +35,15 @@ public abstract class StatusEffectSO: ScriptableObject
 
     public Texture2D effectTex;
 
-    public abstract void OnUpdate(Piece piece);
-    public abstract void OnGameUpdate(Piece piece);
-    public abstract void ModifyMoves(List<ChessMove> curMoves);
-    public abstract void OnPieceMove(Piece piece, ChessMove move);
+    public virtual void OnUpdate(StatusEffect effect, Piece piece) { return; }
+    public virtual void OnGameUpdate(StatusEffect effect, Piece piece) { return; }
+    public virtual void ModifyMoves(StatusEffect effect, List<ChessMove> curMoves) { return; }
+    public virtual void OnPieceMove(StatusEffect effect, Piece piece, ChessMove move) { return; }
 
-    public abstract StatusEffect Gen();
+    public abstract StatusEffect Gen(int id);
+}
+
+public class StatusEffectData
+{
+    public NewHireSO newHireSO;
 }

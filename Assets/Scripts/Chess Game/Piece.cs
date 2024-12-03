@@ -27,7 +27,7 @@ public abstract class Piece : MonoBehaviour
     {
         var moves = GetDefaultMoves(board);
 
-        statusManager.ApplyModifyMoves((effect) => effect.Props.ModifyMoves(moves));
+        statusManager.ApplyModifyMoves((effect) => effect.Props.ModifyMoves(effect, moves));
 
         return moves;
     }
@@ -36,7 +36,7 @@ public abstract class Piece : MonoBehaviour
 
     public virtual void GameUpdate()
     {
-        statusManager.ApplyOnGameUpdate((effect) => effect.Props.OnGameUpdate(this));
+        statusManager.ApplyOnGameUpdate((effect) => effect.Props.OnGameUpdate(effect, this));
         return;
     }
 
@@ -62,7 +62,7 @@ public abstract class Piece : MonoBehaviour
             this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
         }
 
-        statusManager.ApplyOnUpdate((effect) => effect.Props.OnUpdate(this));
+        statusManager.ApplyOnUpdate((effect) => effect.Props.OnUpdate(effect, this));
     }
 
     public static void AppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board, TeamColor teamColor)
@@ -170,8 +170,9 @@ public class StatusAcceptor
             (effect) => effect.Props.ModifyMovesOrder, this);
     }
 
-    public void AcceptStatus(StatusEffect status)
+    public void AcceptStatus(StatusEffectSO statusSO)
     {
+        var status = statusSO.Gen(cur);
         Stati.Add(cur, status);
 
         onPieceMoveAppList.AcceptStatus(cur, status);
@@ -189,6 +190,18 @@ public class StatusAcceptor
         onUpdateAppList.RemoveStatus(id);
         onGameUpdateAppList.RemoveStatus(id);
         modifyMoveAppList.RemoveStatus(id);
+    }
+
+    public bool HasStatusType<EffectType>() where EffectType : StatusEffect
+    {
+        foreach (var effect in Stati.Values)
+        {
+            if (effect.GetType() == typeof(EffectType))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void ApplyOnPieceMove(Action<StatusEffect> applier) => onPieceMoveAppList.ApplyStatus(applier);

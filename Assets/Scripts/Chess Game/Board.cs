@@ -36,8 +36,17 @@ public class Board : MonoBehaviour
 
     #region gameloop
 
+    private int numMoves = 0;
+    public int NumMoves 
+    {
+        get => numMoves;
+        set => numMoves = value;
+    }
+
     ChessController mainController;
     ChessController activeController;
+
+    public EventManager eventManager;
 
     public TeamColor activePlayer = TeamColor.White;
     public bool gameOver = false;
