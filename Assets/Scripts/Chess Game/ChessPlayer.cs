@@ -229,8 +229,11 @@ public class ChessPlayer : MonoBehaviour
     private void ClearSelection()
     {
         selected = false;
-        this.selectedPiece.selected = false;
-        this.selectedPiece = null;
+        if (this.selectedPiece != null)
+        {
+            this.selectedPiece.selected = false;
+            this.selectedPiece = null;
+        }
         potentialMoves.Clear();
         selectedLocation = new Vector2Int(-1, -1);
     }

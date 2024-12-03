@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
-    
-
     public override List<ChessMove> GetDefaultMoves(Board board)
     {
         List<ChessMove> moves = new List<ChessMove>();

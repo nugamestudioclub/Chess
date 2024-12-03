@@ -76,9 +76,9 @@ public class Board : MonoBehaviour
 
     private void SetController(ChessController controller)
     {
-        activeController.OnStart();
-        activeController = controller;
         activeController.OnEnd();
+        activeController = controller;
+        activeController.OnStart();
     }
 
     #endregion
