@@ -89,39 +89,3 @@ public class HashSetOfEventTypes
 
     public bool Has(Type type) => typeSet.Contains(type);
 }
-
-public class NewHireEvent : RandomEvent
-{
-    private NewHire status;
-
-    protected override void DoEnd()
-    {
-        return;
-    }
-
-    protected override void DoStart()
-    {
-        var candidatePieces = new List<Piece>();
-
-        foreach (var piece in board.Pieces)
-        {
-            if (piece.teamColor == this.team)
-            {
-                candidatePieces.Add(piece);
-            }
-        }
-
-        var rand = new System.Random();
-
-        if (candidatePieces.Count < 1)
-        {
-            End();
-            return;
-        }
-
-        int sel = rand.Next(candidatePieces.Count);
-        var selected = candidatePieces[sel];
-
-        selected.statusManager.AcceptStatus(manager.statusData.newHireSO);
-    }
-}

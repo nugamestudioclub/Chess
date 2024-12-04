@@ -134,7 +134,6 @@ public class ChessPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
         {
-
             var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
             if (selector == null)
             {
@@ -219,9 +218,10 @@ public class ChessPlayer : MonoBehaviour
 
                 if (selPiece.statusManager.HasStatusType<NewHire>())
                 {
+                    Debug.Log("moved piece with nh");
                     var rand = new System.Random();
 
-                    if (rand.NextDouble() > 0.5f)
+                    if (rand.NextDouble() > 0 /*0.5f*/)
                     {
                         int newMoveIndex = rand.Next(potentialMoves.Count);
                         sentMove = potentialMoves[newMoveIndex];

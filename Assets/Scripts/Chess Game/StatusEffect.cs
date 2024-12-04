@@ -43,7 +43,8 @@ public abstract class StatusEffectSO: ScriptableObject
     public abstract StatusEffect Gen(int id);
 }
 
-public class StatusEffectData
+[CreateAssetMenu(fileName = "StatusEffectData", menuName = "Events/Statuses/Status Effect Data")]
+public class StatusEffectData : ScriptableObject
 {
     public NewHireSO newHireSO;
 }

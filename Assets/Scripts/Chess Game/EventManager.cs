@@ -5,18 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName="EventManager", menuName = "Events/EventManager")]
 public class EventManager : ScriptableObject
 {
-    [SerializeField] public StatusEffectData statusData;
+    public StatusEffectData statusData;
     [SerializeField] private List<RandomEventSO> events;
 
-    private HashSet<RandomEventSO> seenEvents = new();
-    private HashSet<RandomEvent> currentEvents = new();
+    [NonSerialized] private HashSet<RandomEventSO> seenEvents = new();
+    [NonSerialized] private HashSet<RandomEvent> currentEvents = new();
 
-    private Board board;
-    private int numEvents = 0;
+    [HideInInspector] public Board board;
+    [NonSerialized] private int numEvents = 0;
 
-    private int whiteNextEvent = 0;
+    [NonSerialized] private int whiteNextEvent = 0;
     public int WhiteNextEvent => whiteNextEvent;
-    private int blackNextEvent = 0;
+    [NonSerialized] private int blackNextEvent = 0;
     public int BlackNextEvent => blackNextEvent;
 
     public void SetNextWhiteEvent() => whiteNextEvent = GenNextEventMove();
@@ -64,24 +64,25 @@ public class EventManager : ScriptableObject
         {
             if (availableEvents.Contains(i))
             {
-                return;
+                continue;
             }
 
             var evt = events[i];
+            Debug.Log(evt.name);
 
             if (evt.ExcludeBeforeMove > board.NumMoves)
             {
-                return;
+                continue;
             }
 
             if (evt.ExcludeBeforeEventCount > numEvents)
             {
-                return;
+                continue;
             }
 
             if (!ValidatePrereqs(evt))
             {
-                return;
+                continue;
             }
 
             availableEvents.Add(i);

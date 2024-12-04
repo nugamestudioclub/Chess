@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public abstract class Piece : MonoBehaviour
@@ -170,7 +172,7 @@ public class StatusAcceptor
             (effect) => effect.Props.ModifyMovesOrder, this);
     }
 
-    public void AcceptStatus(StatusEffectSO statusSO)
+    public StatusEffect AcceptStatus(StatusEffectSO statusSO)
     {
         var status = statusSO.Gen(cur);
         Stati.Add(cur, status);
@@ -181,6 +183,8 @@ public class StatusAcceptor
         modifyMoveAppList.AcceptStatus(cur, status);
 
         cur++;
+
+        return status;
     }
 
     public void RemoveStatus(int id)
@@ -240,8 +244,22 @@ class StatusApplicationList
 
     public void ApplyStatus(Action<StatusEffect> applier)
     {
-        foreach (var id in idPositions)
+        var idPClone = new List<int>();
+
+        for (int i = 0; i < idPositions.Count; i++)
         {
+            idPClone.Add(idPositions[i]);
+        }
+
+        for (int i = 0; i < idPClone.Count; i++)
+        {
+            var id = idPClone[i];
+
+            if (!idPositions.Contains(id))
+            {
+                continue;
+            }
+
             applier.Invoke(acceptor.Stati[id]);
         }
     }

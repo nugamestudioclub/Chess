@@ -662,6 +662,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7498018162884343486, guid: aaded257b0fbf496b9b7f8a03a3bfe0d, type: 3}
+      propertyPath: eventManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 54fdff898505c2344a8f9e500e997713, type: 2}
+    - target: {fileID: 7498018162884343486, guid: aaded257b0fbf496b9b7f8a03a3bfe0d, type: 3}
       propertyPath: squareCreator
       value: 
       objectReference: {fileID: 1010111345}
@@ -694,6 +698,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 6630406145658574281, guid: b6f4261257ec89b45b137697c92f7160, type: 3}
+  whiteMaterial: {fileID: 0}
+  blackMaterial: {fileID: 0}
 --- !u!1 &1305858203
 GameObject:
   m_ObjectHideFlags: 0

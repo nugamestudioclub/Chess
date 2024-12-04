@@ -31,6 +31,7 @@ public class Board : MonoBehaviour
     public List<Piece> Pieces => pieces;
     public void Start()
     {
+        eventManager.board = this;
         StartGame();
     }
 

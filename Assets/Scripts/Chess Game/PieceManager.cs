@@ -18,6 +18,11 @@ public class PieceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (hoveredPiece == null)
+        {
+            return;
+        }
+
         string displayText = this.hoveredPiece.rank + " (" + this.hoveredPiece.teamColor + ")\n\n"
             + "Status Effects:\n";
         foreach (StatusEffect statusEffect in this.hoveredPiece.statuses)

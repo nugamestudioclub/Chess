@@ -47,7 +47,10 @@ public class SquareSelectorCreator : MonoBehaviour
 
         var square = selector.AddComponent<SquareSelector>();
 
-        if (counter % 2 == 0)
+        bool xEven = position.x % 2 == 0;
+        bool yEven = position.y % 2 == 0;
+
+        if (xEven == yEven)
         {
             square.GetComponent<Renderer>().material = whiteMaterial;
         }
