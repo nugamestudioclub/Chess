@@ -86,7 +86,10 @@ public class ChessPlayer : MonoBehaviour
                 this.hovered = false;
                 foreach (Piece piece in board.Pieces)
                 {
-                    piece.hovered = false;
+                    if (piece != null)
+                    {
+                        piece.hovered = false;
+                    }
                 }
                 return;
             }
@@ -94,7 +97,7 @@ public class ChessPlayer : MonoBehaviour
             this.hoveredPiece.hovered = true;
             foreach (Piece piece in board.Pieces)
             {
-                if (piece != this.hoveredPiece)
+                if (piece != null && piece != this.hoveredPiece)
                 {
                     piece.hovered = false;
                 }
@@ -105,7 +108,10 @@ public class ChessPlayer : MonoBehaviour
             this.hovered = false;
             foreach (Piece piece in board.Pieces)
             {
-                piece.hovered = false;
+                if (piece != null)
+                {
+                    piece.hovered = false;
+                }
             }
         }
     }
@@ -116,7 +122,10 @@ public class ChessPlayer : MonoBehaviour
 
         foreach (Piece piece in board.Pieces)
         {
-            piece.selected = false;
+            if (piece != null)
+            {
+                piece.selected = false;
+            }
         }
 
         // Get mouse position
@@ -152,10 +161,14 @@ public class ChessPlayer : MonoBehaviour
             }
 
             this.selectedPiece = this.board.GetPiece(selector.position);
-            this.selectedPiece.selected = true;
+            if (this.selectedPiece != null)
+            {
+                this.selectedPiece.selected = true;
+                
+            }
             foreach (Piece piece in board.Pieces)
             {
-                if (piece != this.selectedPiece)
+                if (piece != null && piece != this.selectedPiece)
                 {
                     piece.selected = false;
                 }

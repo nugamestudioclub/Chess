@@ -45,18 +45,7 @@ public class EventManager : ScriptableObject
     }
 
     private List<int> availableEvents = new();
-
-    public RandomEventSO GetRandEventSO()
-    {
-        CalcAvailable();
-        var eventPoolIndexes = ScreenAvailable();
-
-        System.Random rand = new System.Random();
-
-        int eventIndex = rand.Next(eventPoolIndexes.Count);
-
-        return events[eventPoolIndexes[eventIndex]];
-    }
+    
 
     public void CalcAvailable()
     {
@@ -68,24 +57,28 @@ public class EventManager : ScriptableObject
             }
 
             var evt = events[i];
-            Debug.Log(evt.name);
-
-            if (evt.ExcludeBeforeMove > board.NumMoves)
+            if(evt != null)
             {
-                continue;
-            }
+                Debug.Log(evt.name);
 
-            if (evt.ExcludeBeforeEventCount > numEvents)
-            {
-                continue;
-            }
+                if (evt.ExcludeBeforeMove > board.NumMoves)
+                {
+                    continue;
+                }
 
-            if (!ValidatePrereqs(evt))
-            {
-                continue;
-            }
+                if (evt.ExcludeBeforeEventCount > numEvents)
+                {
+                    continue;
+                }
 
-            availableEvents.Add(i);
+                if (!ValidatePrereqs(evt))
+                {
+                    continue;
+                }
+
+                availableEvents.Add(i);
+                
+            }
         }
     }
 

@@ -69,12 +69,6 @@ public class ChessController
         Debug.Log(board.NumMoves);
         if (eventMove <= board.NumMoves)
         {
-            Debug.Log("eventing");
-            RandomEventSO spawner = board.eventManager.GetRandEventSO();
-            RandomEvent evt = spawner.LinkedEventGen(board.eventManager, activePlayer, board);
-            board.eventManager.AddEvent(evt, spawner);
-
-            Debug.Log(evt.ToString());
 
             if (activePlayer == TeamColor.White)
             {
