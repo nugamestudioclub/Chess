@@ -27,6 +27,8 @@ public class ChessPlayer : MonoBehaviour
     public static ChessPlayer instance;
 
     public List<SquareSelector> squares = new List<SquareSelector>();
+
+    [SerializeField] private Camera mainCam;
     
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class ChessPlayer : MonoBehaviour
         TeamTurnText.instance.SetTeamsTurnText(teamColor);
 
         board = Board.instance;
+        
+        mainCam = Camera.main;
     }
 
     private void Update()
@@ -72,7 +76,7 @@ public class ChessPlayer : MonoBehaviour
 
         // Create a ray from the mouse position
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Ray ray = mainCam.ScreenPointToRay(mousePosition);
 
 
         // Perform raycast
@@ -149,7 +153,7 @@ public class ChessPlayer : MonoBehaviour
 
         // Create a ray from the mouse position
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Ray ray = mainCam.ScreenPointToRay(mousePosition);
 
 
         // Perform raycast
