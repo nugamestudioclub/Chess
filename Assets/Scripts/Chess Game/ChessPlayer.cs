@@ -45,7 +45,6 @@ public class ChessPlayer : MonoBehaviour
                 square.transform.GetChild(0).gameObject.SetActive(false);
             }
             HandleMouse();
-            
         }
         HoverMouse();
         if (this.hovered)
@@ -279,6 +278,8 @@ public class ChessPlayer : MonoBehaviour
 
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
 
+                
+                
                 this.selectedPiece = null;
 
                 ClearSelection();
