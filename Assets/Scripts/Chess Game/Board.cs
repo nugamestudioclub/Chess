@@ -29,6 +29,14 @@ public class Board : MonoBehaviour
 
     private List<Piece> pieces;
     public List<Piece> Pieces => pieces;
+
+    public static Board instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void Start()
     {
         eventManager.board = this;

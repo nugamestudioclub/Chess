@@ -4,9 +4,9 @@ public class ChessCameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float zoomSpeed = 5f;
+    [SerializeField] private float zoomSpeed = 10f;
     [SerializeField] private float minZoom = 2f;
-    [SerializeField] private float maxZoom = 15f;
+    [SerializeField] private float maxZoom = 30f;
 
     private float currentZoom;
     private float yaw;
@@ -53,7 +53,7 @@ public class ChessCameraController : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             atStartingPoint = false;
             reset = false;

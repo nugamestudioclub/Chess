@@ -32,8 +32,6 @@ public class ChessPlayer : MonoBehaviour
     {
         instance = this;
 
-        board = FindObjectOfType<Board>(); // bad for performance
-        
     }
 
     private void Start()
@@ -41,6 +39,7 @@ public class ChessPlayer : MonoBehaviour
         
         TeamTurnText.instance.SetTeamsTurnText(teamColor);
 
+        board = Board.instance;
     }
 
     private void Update()

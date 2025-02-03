@@ -686,8 +686,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1542228896}
   rotationSpeed: 5
-  zoomSpeed: 5
-  minZoom: 2
+  zoomSpeed: 10
+  minZoom: 10
   maxZoom: 30
 --- !u!1001 &1010111340
 PrefabInstance:

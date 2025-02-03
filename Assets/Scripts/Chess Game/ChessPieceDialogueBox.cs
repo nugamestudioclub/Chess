@@ -10,7 +10,7 @@ public class ChessPieceDialogueBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board = FindObjectOfType<Board>();
+        board = Board.instance;
     }
 
     // Update is called once per frame
