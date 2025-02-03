@@ -57,7 +57,7 @@ public abstract class Piece : MonoBehaviour
         {
             var hoveredPieceMat = this.GetComponent<Renderer>().material;
             hoveredPieceMat.SetFloat("_Alpha", 1.0f);
-            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 90));
+            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
         }
         else
         {

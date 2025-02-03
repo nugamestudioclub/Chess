@@ -175,12 +175,10 @@ public class Board : MonoBehaviour
             offsetControl += Time.deltaTime;
             offsetY = EaseInOutQuint(offsetControl) * 180;
             transform.eulerAngles = new Vector3(transform.rotation.x, initialYRot + offsetY, transform.rotation.z);
-                    
-            foreach (SquareSelector square in ChessPlayer.instance.squares)
-            {
-                square.transform.GetChild(0).gameObject.SetActive(false);
-            }
 
+
+            ChessPlayer.instance.ClearTileIndicators();
+            
             yield return new WaitForEndOfFrame();
         }
 

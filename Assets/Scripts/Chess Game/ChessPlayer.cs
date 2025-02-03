@@ -40,10 +40,7 @@ public class ChessPlayer : MonoBehaviour
 
         if (canClick && Input.GetMouseButtonDown(0))
         {
-            foreach (SquareSelector square in squares)
-            {
-                square.transform.GetChild(0).gameObject.SetActive(false);
-            }
+            ClearTileIndicators();
             HandleMouse();
         }
         HoverMouse();
@@ -203,12 +200,12 @@ public class ChessPlayer : MonoBehaviour
                     {
                         if (square.position == pos)
                         {
-                            square.transform.GetChild(0).gameObject.SetActive(true);
+                            square.ToggleMoveTileIndicator(true);
                         }
                     }
                     if (square.position == move.destination)
                     {
-                        square.transform.GetChild(0).gameObject.SetActive(true);
+                        square.ToggleMoveTileIndicator(true);
                     }
                     
                 }
@@ -307,5 +304,15 @@ public class ChessPlayer : MonoBehaviour
     public void Switch()
     {
         teamColor = teamColor == TeamColor.White ? TeamColor.Black : TeamColor.White;
+    }
+
+    public void ClearTileIndicators()
+    {
+        
+        foreach (SquareSelector square in ChessPlayer.instance.squares)
+        {
+            square.ToggleMoveTileIndicator(false);
+        }
+
     }
 }
