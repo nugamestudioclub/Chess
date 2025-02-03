@@ -40,7 +40,12 @@ public class ChessPlayer : MonoBehaviour
 
         if (canClick && Input.GetMouseButtonDown(0))
         {
+            foreach (SquareSelector square in squares)
+            {
+                square.transform.GetChild(0).gameObject.SetActive(false);
+            }
             HandleMouse();
+            
         }
         HoverMouse();
         if (this.hovered)
@@ -52,31 +57,7 @@ public class ChessPlayer : MonoBehaviour
             this.board.showPieceInfo = false;
         }
         this.pieceManager.hoveredPiece = this.hoveredPiece;
-
-        if (selectedPiece != null)
-        {
-            foreach (var move in selectedPiece.GetPossibleMoves(board))
-            {
-
-                foreach (SquareSelector square in squares)
-                {
-                    square.transform.GetChild(0).gameObject.SetActive(false);
-
-                    foreach (var pos in move.pathSteps)
-                    {
-                        if (square.position == pos)
-                        {
-                            square.transform.GetChild(0).gameObject.SetActive(true);
-                        }
-                    }
-                    if (square.position == move.destination)
-                    {
-                        square.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                }
-                Debug.Log("destination " + move.destination);
-            }
-        }
+        
     }
 
     private void HoverMouse()
@@ -213,6 +194,28 @@ public class ChessPlayer : MonoBehaviour
             ClearSelection();
         }
         
+        if (selectedPiece != null)
+        {
+            foreach (var move in selectedPiece.GetPossibleMoves(board))
+            {
+                foreach (SquareSelector square in squares)
+                {
+                    foreach (var pos in move.pathSteps)
+                    {
+                        if (square.position == pos)
+                        {
+                            square.transform.GetChild(0).gameObject.SetActive(true);
+                        }
+                    }
+                    if (square.position == move.destination)
+                    {
+                        square.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    
+                }
+                Debug.Log("destination " + move.destination);
+            }
+        }
     }
 
     private void HandleNewSelecection(Vector2Int pos)
@@ -296,6 +299,7 @@ public class ChessPlayer : MonoBehaviour
             this.selectedPiece = null;
         }
         potentialMoves.Clear();
+        
         selectedLocation = new Vector2Int(-1, -1);
     }
 
