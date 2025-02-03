@@ -28,14 +28,14 @@ public class ChessPlayer : MonoBehaviour
     public static ChessPlayer instance;
 
     public List<SquareSelector> squares = new List<SquareSelector>();
-
-    [SerializeField] private TextMeshProUGUI teamsTurnText;
     
     private void Awake()
     {
         instance = this;
 
-        board = FindObjectOfType<Board>();
+        board = FindObjectOfType<Board>(); // bad for performance
+        
+        TeamTurnText.instance.SetTeamsTurnText(teamColor);
     }
 
     private void Update()
@@ -307,7 +307,7 @@ public class ChessPlayer : MonoBehaviour
     public void Switch()
     {
         teamColor = teamColor == TeamColor.White ? TeamColor.Black : TeamColor.White;
-        teamsTurnText.text = teamColor + "'s " + "Turn";
+        TeamTurnText.instance.SetTeamsTurnText(teamColor);
     }
 
     public void ClearTileIndicators()
