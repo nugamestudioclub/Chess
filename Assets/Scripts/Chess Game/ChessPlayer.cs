@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ChessPlayer : MonoBehaviour
 {
@@ -204,11 +202,21 @@ public class ChessPlayer : MonoBehaviour
                         if (square.position == pos)
                         {
                             square.ToggleMoveTileIndicator(true);
+                            if (board.HasPiece(pos))
+                            {
+                                square.ToggleCapturableTileIndicator(true);
+                            }
                         }
+
+
                     }
                     if (square.position == move.destination)
                     {
                         square.ToggleMoveTileIndicator(true);
+                        if (board.HasPiece(move.destination))
+                        {
+                            square.ToggleCapturableTileIndicator(true);
+                        }
                     }
                     
                 }
@@ -313,10 +321,10 @@ public class ChessPlayer : MonoBehaviour
     public void ClearTileIndicators()
     {
         
-        foreach (SquareSelector square in ChessPlayer.instance.squares)
+        foreach (SquareSelector square in squares)
         {
             square.ToggleMoveTileIndicator(false);
+            square.ToggleCapturableTileIndicator(false);
         }
-
     }
 }
