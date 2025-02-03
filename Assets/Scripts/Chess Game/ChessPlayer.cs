@@ -21,8 +21,17 @@ public class ChessPlayer : MonoBehaviour
 
     public Vector2Int hoverPos;
 
+    public bool canClick = false;
+
+
+    public static ChessPlayer instance;
+    
+    
+    
     private void Awake()
     {
+        instance = this;
+        
         selectedLocation = new Vector2Int(-1, -1);
         potentialMoves = new List<ChessMove>();
         selected = false;
@@ -32,7 +41,8 @@ public class ChessPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        if (canClick && Input.GetMouseButtonDown(0))
         {
             HandleMouse();
         }

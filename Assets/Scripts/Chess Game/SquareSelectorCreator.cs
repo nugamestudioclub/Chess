@@ -12,21 +12,23 @@ public class SquareSelectorCreator : MonoBehaviour
 
     public void CreateSquareSelectors(Board board)
     {
-        
+        StartCoroutine(CreateSquareDelay(board));
+
+    }
+
+    private IEnumerator CreateSquareDelay(Board board)
+    {
         for (int x = 0; x < board.Width; x++)
         {
             for (int y = 0; y < board.Height; y++)
             {
                 counter++;
-                StartCoroutine(CreateSquareDelay(board, x, y));
+                CreateSquareSelector(board, new Vector2Int(x, y));
+                yield return new WaitForSeconds(0.05f);
             }
         }
-    }
 
-    private IEnumerator CreateSquareDelay(Board board, int x, int y)
-    {
-        yield return new WaitForSeconds(1);
-        CreateSquareSelector(board, new Vector2Int(x, y));
+        ChessPlayer.instance.canClick = true;
     }
 
     public void CreateSquareSelector(Board board, Vector2Int position)
