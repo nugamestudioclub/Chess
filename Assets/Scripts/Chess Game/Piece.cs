@@ -64,6 +64,7 @@ public abstract class Piece : MonoBehaviour
             this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
         }
 
+
         statusManager.ApplyOnUpdate((effect) => effect.Props.OnUpdate(effect, this));
     }
 

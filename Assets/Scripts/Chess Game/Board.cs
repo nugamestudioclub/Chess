@@ -178,6 +178,11 @@ public class Board : MonoBehaviour
 
 
             ChessPlayer.instance.ClearTileIndicators();
+            foreach (Piece piece in pieces)
+            {
+                piece.hovered = false;
+                piece.selected = false;
+            }
             
             yield return new WaitForEndOfFrame();
         }
