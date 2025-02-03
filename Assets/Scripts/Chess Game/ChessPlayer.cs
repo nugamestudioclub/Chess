@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,7 +34,13 @@ public class ChessPlayer : MonoBehaviour
 
         board = FindObjectOfType<Board>(); // bad for performance
         
+    }
+
+    private void Start()
+    {
+        
         TeamTurnText.instance.SetTeamsTurnText(teamColor);
+
     }
 
     private void Update()
