@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -21,12 +22,14 @@ public class ChessPlayer : MonoBehaviour
 
     public Vector2Int hoverPos;
 
-    public bool canClick = false;
+    [HideInInspector] public bool canClick = false;
 
 
     public static ChessPlayer instance;
 
     public List<SquareSelector> squares = new List<SquareSelector>();
+
+    [SerializeField] private TextMeshProUGUI teamsTurnText;
     
     private void Awake()
     {
@@ -304,6 +307,7 @@ public class ChessPlayer : MonoBehaviour
     public void Switch()
     {
         teamColor = teamColor == TeamColor.White ? TeamColor.Black : TeamColor.White;
+        teamsTurnText.text = teamColor + "'s " + "Turn";
     }
 
     public void ClearTileIndicators()
