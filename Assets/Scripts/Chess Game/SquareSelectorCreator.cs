@@ -39,15 +39,15 @@ public class SquareSelectorCreator : MonoBehaviour
 
         selector.transform.position = board.PosToVect(position);
 
-        var collider = selector.AddComponent<BoxCollider>();
-
         Vector3 size = board.PosToVect(position + Vector2Int.up + Vector2Int.right) - selector.transform.position;
 
         //collider.size = new Vector3(size.x, size.y, size.z);
 
         selector.transform.localScale = new Vector3(size.x, .05f, size.z);
 
-        var square = selector.AddComponent<SquareSelector>();
+        var square = selector.GetComponent<SquareSelector>();
+        
+
 
         bool xEven = position.x % 2 == 0;
         bool yEven = position.y % 2 == 0;
@@ -66,5 +66,7 @@ public class SquareSelectorCreator : MonoBehaviour
         selector.layer = 3; // square layer
 
         selector.name = "square" + position.x + "_" + position.y;
+
+        ChessPlayer.instance.squares.Add(square);
     }
 }

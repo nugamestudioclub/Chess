@@ -8,14 +8,14 @@ public class ChessPlayer : MonoBehaviour
 {
     Board board;
 
-    Vector2Int selectedLocation;
+    Vector2Int selectedLocation = new Vector2Int(-1, -1);
     bool selected = false;
     bool hovered = false;
     public Piece hoveredPiece;
     public Piece selectedPiece;
     [SerializeField] private PieceManager pieceManager;
 
-    List<ChessMove> potentialMoves;
+    List<ChessMove> potentialMoves = new List<ChessMove>();
 
     TeamColor teamColor = TeamColor.White;
 
@@ -25,16 +25,12 @@ public class ChessPlayer : MonoBehaviour
 
 
     public static ChessPlayer instance;
-    
-    
+
+    public List<SquareSelector> squares = new List<SquareSelector>();
     
     private void Awake()
     {
         instance = this;
-        
-        selectedLocation = new Vector2Int(-1, -1);
-        potentialMoves = new List<ChessMove>();
-        selected = false;
 
         board = FindObjectOfType<Board>();
     }
@@ -56,6 +52,31 @@ public class ChessPlayer : MonoBehaviour
             this.board.showPieceInfo = false;
         }
         this.pieceManager.hoveredPiece = this.hoveredPiece;
+
+        if (selectedPiece != null)
+        {
+            foreach (var move in selectedPiece.GetPossibleMoves(board))
+            {
+
+                foreach (SquareSelector square in squares)
+                {
+                    square.transform.GetChild(0).gameObject.SetActive(false);
+
+                    foreach (var pos in move.pathSteps)
+                    {
+                        if (square.position == pos)
+                        {
+                            square.transform.GetChild(0).gameObject.SetActive(true);
+                        }
+                    }
+                    if (square.position == move.destination)
+                    {
+                        square.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                }
+                Debug.Log("destination " + move.destination);
+            }
+        }
     }
 
     private void HoverMouse()
@@ -171,6 +192,9 @@ public class ChessPlayer : MonoBehaviour
             }
 
             this.selectedPiece = this.board.GetPiece(selector.position);
+
+            
+            
             if (this.selectedPiece != null)
             {
                 this.selectedPiece.selected = true;
@@ -206,7 +230,6 @@ public class ChessPlayer : MonoBehaviour
         selectedLocation = pos;
 
         potentialMoves = piece.GetPossibleMoves(board);
-
         // display potential moves
     }
 
