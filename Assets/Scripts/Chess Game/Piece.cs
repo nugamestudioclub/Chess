@@ -6,8 +6,8 @@ public abstract class Piece : MonoBehaviour
 {
     public Vector2Int Position { get; private set; }
 
-    public TeamColor teamColor { get; set; }
-
+    public TeamColor teamColor;
+    
     public String rank;
 
     public bool hasMoved = false;

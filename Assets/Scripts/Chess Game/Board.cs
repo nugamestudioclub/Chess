@@ -7,10 +7,11 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     const int EMPTY_SPACE = -1;
-
-    [SerializeField] private PieceCreator pieceCreator;
+    
     [SerializeField] private BoardLayout layout;
     [SerializeField] private SquareSelectorCreator squareCreator;
+
+    [SerializeField] private GameObject piecePrefab;
     public bool showPieceInfo = false;
 
     public void SetActivePlayer(TeamColor value)
@@ -101,7 +102,13 @@ public class Board : MonoBehaviour
     {
         if (HasPiece(position)) return false;
 
-        GameObject pieceObject = pieceCreator.CreatePiece(pt, transform, tc);
+        GameObject pieceObject = Instantiate(piecePrefab, transform);
+        GamePiece pieceComponent = pieceObject.GetComponent<GamePiece>();
+
+        pieceComponent.pieceType = pt;
+        pieceComponent.teamColor = tc;
+        pieceComponent.UpdateVisual();
+        
         Piece piece = pieceObject.GetComponent<Piece>();
         piece.SetPosition(position, PosToVect(position));
         piece.teamColor = tc;

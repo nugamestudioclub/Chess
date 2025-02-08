@@ -47,5 +47,10 @@ MonoBehaviour:
   pieceCreator: {fileID: 11400000, guid: d3116794c61fbbe45924f28d8bf5ccd6, type: 2}
   layout: {fileID: 11400000, guid: 384d3c1ca569acc4eb43dc3d71a9644a, type: 2}
   squareCreator: {fileID: 0}
+  piecePrefab: {fileID: 1097155551969228, guid: 44ca3540c3b81264e911c5f734607fc3, type: 3}
+  showPieceInfo: 0
   Width: 8
   Height: 8
+  eventManager: {fileID: 0}
+  activePlayer: 1
+  gameOver: 0
