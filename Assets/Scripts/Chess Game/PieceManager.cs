@@ -24,7 +24,7 @@ public class PieceManager : MonoBehaviour
             return;
         }
 
-        string displayText = this.hoveredPiece.rank + " (" + this.hoveredPiece.teamColor + ")\n\n"
+        string displayText = this.hoveredPiece.pieceType + " (" + this.hoveredPiece.teamColor + ")\n\n"
                              + "Status Effects:\n";
         foreach (StatusEffect statusEffect in this.hoveredPiece.statuses)
         {
@@ -37,48 +37,48 @@ public class PieceManager : MonoBehaviour
         
         if(this.hoveredPiece.teamColor == TeamColor.Black)
         {
-            switch (this.hoveredPiece.rank)
+            switch (this.hoveredPiece.pieceType)
             {
-                case "King":
+                case PieceType.King:
                     pieceIconFont = "k";                
                     break;
-                case "Queen":
+                case PieceType.Queen:
                     pieceIconFont = "q";               
                     break;
-                case "Rook":
+                case PieceType.Rook:
                     pieceIconFont = "r"; 
                     break;
-                case "Bishop":
+                case PieceType.Bishop:
                     pieceIconFont = "b"; 
                     break;
-                case "Knight":
+                case PieceType.Knight:
                     pieceIconFont = "h"; 
                     break;
-                case "Pawn":
+                case PieceType.Pawn:
                     pieceIconFont = "p";               
                     break;
             }
         }
         else if(this.hoveredPiece.teamColor == TeamColor.White)
         {
-               switch (this.hoveredPiece.rank)
+               switch (this.hoveredPiece.pieceType)
             {
-                case "King":
+                case PieceType.King:
                     pieceIconFont = "l";                
                     break;
-                case "Queen":
+                case PieceType.Queen:
                     pieceIconFont = "w";                
                     break;
-                case "Rook":
+                case PieceType.Rook:
                     pieceIconFont = "t"; 
                     break;
-                case "Bishop":
+                case PieceType.Bishop:
                     pieceIconFont = "n"; 
                     break;
-                case "Knight":
+                case PieceType.Knight:
                     pieceIconFont = "j"; 
                     break;
-                case "Pawn":
+                case PieceType.Pawn:
                     pieceIconFont = "o";               
                     break;
             }

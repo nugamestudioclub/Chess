@@ -69,7 +69,7 @@ public class NewHireEvent : RandomEvent
         int sel = rand.Next(candidatePieces.Count);
         var selected = candidatePieces[sel];
 
-        Debug.Log("new hire" + selected.Position.x + selected.Position.y + selected.rank);
+        Debug.Log("new hire" + selected.Position.x + selected.Position.y + selected.pieceType);
         status = selected.statusManager.AcceptStatus(manager.statusData.newHireSO) as NewHire;
         status.nhe = this;
     }

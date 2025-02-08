@@ -4,12 +4,12 @@ using UnityEngine;
 
 public abstract class Piece : MonoBehaviour
 {
+    
+    public PieceType pieceType = PieceType.Pawn;
     public Vector2Int Position { get; private set; }
 
     public TeamColor teamColor;
     
-    public String rank;
-
     public bool hasMoved = false;
     public bool selected = false;
     public bool hovered = false;

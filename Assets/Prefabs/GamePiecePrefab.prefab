@@ -100,12 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0988c9ec7e6924c8dd7804f946eb25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pieceType: 0
   teamColor: 0
   rank: 
   hasMoved: 0
   selected: 0
   hovered: 0
-  pieceType: 0
   meshRenderer: {fileID: 23353531918940410}
   meshFilter: {fileID: 33360194353735420}
   whitePieceMaterial: {fileID: 2100000, guid: 95607dbe2e7c3481c90296c75fb23104, type: 2}
