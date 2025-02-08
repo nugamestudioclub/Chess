@@ -43,24 +43,28 @@ public abstract class Piece : MonoBehaviour
 
     private void Update()
     {
-        if (this.hovered)
+        Renderer meshRenderer = GetComponent<Renderer>();
+        if (meshRenderer != null)
         {
-            this.GetComponent<Renderer>().material.SetFloat("_Alpha", 1.0f);
-        }
-        else
-        {
-            this.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.0f);
-        }
+            if (this.hovered)
+            {
+                meshRenderer.materials[1].SetFloat("_Alpha", 1.0f);
+            }
+            else
+            {
+                meshRenderer.materials[1].SetFloat("_Alpha", 0.0f);
+            }
 
-        if (this.selected)
-        {
-            var hoveredPieceMat = this.GetComponent<Renderer>().material;
-            hoveredPieceMat.SetFloat("_Alpha", 1.0f);
-            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(0, 255, 0));
-        }
-        else
-        {
-            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
+            if (this.selected)
+            {
+                meshRenderer.materials[1].SetFloat("_Alpha", 1.0f);
+                meshRenderer.materials[1].SetColor("_Color", new Color(0, 255, 0));
+            }
+            else
+            {
+                meshRenderer.materials[1].SetColor("_Color", new Color(255, 255, 255));
+            }
+            
         }
 
 

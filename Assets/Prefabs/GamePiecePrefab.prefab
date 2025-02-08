@@ -102,7 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 0
   teamColor: 0
-  rank: 
   hasMoved: 0
   selected: 0
   hovered: 0
