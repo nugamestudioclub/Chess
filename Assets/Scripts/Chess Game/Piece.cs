@@ -18,7 +18,8 @@ public abstract class Piece : MonoBehaviour
 
     public StatusAcceptor statusManager = new();
     public List<StatusEffect> statuses => statusManager.ToList();
-
+    
+    
     public void SetPosition(Vector2Int position, Vector3 worldPos)
     {
         Position = position;
@@ -57,7 +58,7 @@ public abstract class Piece : MonoBehaviour
         {
             var hoveredPieceMat = this.GetComponent<Renderer>().material;
             hoveredPieceMat.SetFloat("_Alpha", 1.0f);
-            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
+            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(0, 255, 0));
         }
         else
         {
