@@ -1,4 +1,5 @@
 public enum TeamColor
 {
-    Black, White
+    Black,
+    White
 }

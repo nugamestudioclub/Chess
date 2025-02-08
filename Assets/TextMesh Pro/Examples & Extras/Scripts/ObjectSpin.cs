@@ -4,11 +4,16 @@ using System.Collections;
 
 namespace TMPro.Examples
 {
-
     public class ObjectSpin : MonoBehaviour
     {
-        #pragma warning disable 0414
-        public enum MotionType { Rotation, SearchLight, Translation };
+#pragma warning disable 0414
+        public enum MotionType
+        {
+            Rotation,
+            SearchLight,
+            Translation
+        };
+
         public MotionType Motion;
 
         public Vector3 TranslationDistance = new Vector3(5, 0, 0);
@@ -44,7 +49,8 @@ namespace TMPro.Examples
                     break;
                 case MotionType.SearchLight:
                     m_time += SpinSpeed * Time.deltaTime;
-                    m_transform.rotation = Quaternion.Euler(m_initial_Rotation.x, Mathf.Sin(m_time) * RotationRange + m_initial_Rotation.y, m_initial_Rotation.z);
+                    m_transform.rotation = Quaternion.Euler(m_initial_Rotation.x,
+                        Mathf.Sin(m_time) * RotationRange + m_initial_Rotation.y, m_initial_Rotation.z);
                     break;
                 case MotionType.Translation:
                     m_time += TranslationSpeed * Time.deltaTime;

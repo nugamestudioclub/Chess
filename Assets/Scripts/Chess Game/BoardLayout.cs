@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Board/Layout")]
 public class BoardLayout : ScriptableObject
 {
-    
     [System.Serializable]
     public class BoardSquareSetup
     {
@@ -27,33 +26,36 @@ public class BoardLayout : ScriptableObject
     // (0, 0) is bottom left
     public Vector2Int GetSquareCoordsAtIndex(int index)
     {
-        if(boardSquares.Length <= index)
+        if (boardSquares.Length <= index)
         {
             Debug.LogError("Index of piece is out of range!");
             return new Vector2Int(-1, -1);
         }
+
         return new Vector2Int(boardSquares[index].position.x - 1, boardSquares[index].position.y - 1);
     }
 
     // returns name of piece on a particular square
     public string GetSquarePieceNameAtIndex(int index)
     {
-        if(boardSquares.Length <= index)
+        if (boardSquares.Length <= index)
         {
             Debug.LogError("Index of piece is out of range!");
             return "";
         }
+
         return boardSquares[index].pieceType.ToString();
     }
 
     // returns color of piece on a particular square
     public TeamColor GetSquareTeamColorAtIndex(int index)
     {
-        if(boardSquares.Length <= index)
+        if (boardSquares.Length <= index)
         {
             Debug.LogError("Index of piece is out of range!");
             return TeamColor.Black;
         }
+
         return boardSquares[index].teamColor;
     }
 

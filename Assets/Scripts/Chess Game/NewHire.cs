@@ -27,13 +27,16 @@ public class NewHire : StatusEffect
     public int numTurns = 6;
     public NewHireEvent nhe = null;
 
-    public NewHire(StatusEffectSO nhso, int id) : base(nhso, id) { }
+    public NewHire(StatusEffectSO nhso, int id) : base(nhso, id)
+    {
+    }
 }
 
 [CreateAssetMenu(fileName = "NewHireEvent", menuName = "Events/New Hire Event")]
 public class NewHireEventSO : LinkRandomSO<NewHireEvent>
 {
 }
+
 public class NewHireEvent : RandomEvent
 {
     private NewHire status;

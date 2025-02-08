@@ -15,14 +15,17 @@ public abstract class StatusEffect
     }
 }
 
-public abstract class StatusEffectSO: ScriptableObject
+public abstract class StatusEffectSO : ScriptableObject
 {
     // these values shouldn't be modified during run time bc modifications wont have consistent effects
 
     [SerializeField] private int sortingOrder = 0;
 
-    [SerializeField] private int onUpdateOrder = -1;      // if -1 or less, piece uses sorting order,
-    [SerializeField] private int onGameUpdateOrder = -1;  // to determine the order for applying status in a section of Piece,
+    [SerializeField] private int onUpdateOrder = -1; // if -1 or less, piece uses sorting order,
+
+    [SerializeField]
+    private int onGameUpdateOrder = -1; // to determine the order for applying status in a section of Piece,
+
     [SerializeField] private int modifyMovesOrder = -1; // other wise, uses this case specific value
     [SerializeField] private int onPieceMoveOrder = -1;
 
@@ -35,10 +38,25 @@ public abstract class StatusEffectSO: ScriptableObject
 
     public Texture2D effectTex;
 
-    public virtual void OnUpdate(StatusEffect effect, Piece piece) { return; }
-    public virtual void OnGameUpdate(StatusEffect effect, Piece piece) { return; }
-    public virtual void ModifyMoves(StatusEffect effect, List<ChessMove> curMoves) { return; }
-    public virtual void OnPieceMove(StatusEffect effect, Piece piece, ChessMove move) { return; }
+    public virtual void OnUpdate(StatusEffect effect, Piece piece)
+    {
+        return;
+    }
+
+    public virtual void OnGameUpdate(StatusEffect effect, Piece piece)
+    {
+        return;
+    }
+
+    public virtual void ModifyMoves(StatusEffect effect, List<ChessMove> curMoves)
+    {
+        return;
+    }
+
+    public virtual void OnPieceMove(StatusEffect effect, Piece piece, ChessMove move)
+    {
+        return;
+    }
 
     public abstract StatusEffect Gen(int id);
 }

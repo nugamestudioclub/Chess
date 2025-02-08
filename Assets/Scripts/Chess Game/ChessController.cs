@@ -12,11 +12,13 @@ public class ChessController
     }
 
     private List<Piece> pieces => board.Pieces;
+
     private TeamColor activePlayer
     {
         get => board.activePlayer;
         set => board.SetActivePlayer(value);
     }
+
     private bool gameOver
     {
         get => board.gameOver;
@@ -63,13 +65,14 @@ public class ChessController
 
         // apply any event
 
-        int eventMove = activePlayer == TeamColor.White ? board.eventManager.WhiteNextEvent : board.eventManager.BlackNextEvent;
+        int eventMove = activePlayer == TeamColor.White
+            ? board.eventManager.WhiteNextEvent
+            : board.eventManager.BlackNextEvent;
 
         Debug.Log(eventMove);
         Debug.Log(board.NumMoves);
         if (eventMove <= board.NumMoves)
         {
-
             if (activePlayer == TeamColor.White)
             {
                 board.eventManager.SetNextWhiteEvent();
