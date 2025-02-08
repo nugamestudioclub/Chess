@@ -16,8 +16,9 @@ public abstract class Piece : MonoBehaviour
 
     public StatusAcceptor statusManager = new();
     public List<StatusEffect> statuses => statusManager.ToList();
-    
-    
+
+    [HideInInspector] public RandomStatus status = RandomStatus.None;
+
     public void SetPosition(Vector2Int position, Vector3 worldPos)
     {
         Position = position;
@@ -32,8 +33,6 @@ public abstract class Piece : MonoBehaviour
 
         return moves;
     }
-
-    public abstract List<ChessMove> GetDefaultMoves(Board board);
 
     public virtual void GameUpdate()
     {
@@ -140,134 +139,211 @@ public abstract class Piece : MonoBehaviour
 
         moves.Add(move);
     }
-}
+    
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private MeshFilter meshFilter;
 
-public class StatusAcceptor
-{
-    private int cur = 0;
-    public Dictionary<int, StatusEffect> Stati { get; private set; }
+    [SerializeField] private Material whitePieceMaterial;
+    [SerializeField] private Material blackPieceMaterial;
 
-    public List<StatusEffect> ToList()
+    public List<RankToMesh> rankToMeshes = new List<RankToMesh>();
+    
+    private void OnEnable()
     {
-        List<StatusEffect> res = new();
+        UpdateVisual();
+    }
 
-        foreach (var effect in Stati.Values)
+    private void OnValidate()
+    {
+        UpdateVisual();
+    }
+
+    public void UpdateVisual()
+    {
+        if (meshFilter == null)
         {
-            res.Add(effect);
+            Debug.LogError("MeshFilter is not assigned on " + gameObject.name);
+            return;
+        }
+        if (meshRenderer == null)
+        {
+            Debug.LogError("MeshRenderer is not assigned on " + gameObject.name);
+            return;
         }
 
-        return res;
-    }
-
-    private StatusApplicationList onPieceMoveAppList;
-    private StatusApplicationList onUpdateAppList;
-    private StatusApplicationList onGameUpdateAppList;
-    private StatusApplicationList modifyMoveAppList;
-
-    public StatusAcceptor()
-    {
-        Stati = new();
-
-        onPieceMoveAppList = new StatusApplicationList(
-            (effect) => effect.Props.OnPieceMoveOrder, this);
-        onUpdateAppList = new StatusApplicationList(
-            (effect) => effect.Props.OnUpdateOrder, this);
-        onGameUpdateAppList = new StatusApplicationList(
-            (effect) => effect.Props.OnGameUpdateOrder, this);
-        modifyMoveAppList = new StatusApplicationList(
-            (effect) => effect.Props.ModifyMovesOrder, this);
-    }
-
-    public StatusEffect AcceptStatus(StatusEffectSO statusSO)
-    {
-        var status = statusSO.Gen(cur);
-        Stati.Add(cur, status);
-
-        onPieceMoveAppList.AcceptStatus(cur, status);
-        onUpdateAppList.AcceptStatus(cur, status);
-        onGameUpdateAppList.AcceptStatus(cur, status);
-        modifyMoveAppList.AcceptStatus(cur, status);
-
-        cur++;
-
-        return status;
-    }
-
-    public void RemoveStatus(int id)
-    {
-        Stati.Remove(id);
-        onPieceMoveAppList.RemoveStatus(id);
-        onUpdateAppList.RemoveStatus(id);
-        onGameUpdateAppList.RemoveStatus(id);
-        modifyMoveAppList.RemoveStatus(id);
-    }
-
-    public bool HasStatusType<EffectType>() where EffectType : StatusEffect
-    {
-        foreach (var effect in Stati.Values)
+        RankToMesh rankToMesh = rankToMeshes.Find(rtm => rtm.rank == pieceType);
+        if (rankToMesh.mesh != null)
         {
-            if (effect.GetType() == typeof(EffectType))
+            meshFilter.mesh = rankToMesh.mesh;
+        }
+        else
+        {
+            Debug.LogError($"No mesh found for {pieceType} in {gameObject.name}");
+        }
+
+        switch (teamColor)
+        {
+            case TeamColor.White:
+                meshRenderer.material = whitePieceMaterial;
+                transform.rotation = Quaternion.identity;
+                break;
+            case TeamColor.Black:
+                meshRenderer.material = blackPieceMaterial;
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                break;
+        }
+    }
+
+    public virtual List<ChessMove> GetDefaultMoves(Board board)
+    {
+        List<ChessMove> pieceMoves = new List<ChessMove>();
+        
+        switch (pieceType)
+        {
+            case PieceType.Pawn:
+                pieceMoves = GetPawnMoves(board);
+                break;
+            case PieceType.Rook:
+                pieceMoves = GetRookMoves(board);
+                break;
+            case PieceType.Knight:
+                pieceMoves = GetKnightMoves(board);
+                break;
+            case PieceType.Bishop:
+                pieceMoves = GetBishopMoves(board);
+                break;
+            case PieceType.Queen:
+                pieceMoves = GetQueenMoves(board);
+                break;
+            case PieceType.King:
+                pieceMoves = GetKingMoves(board);
+                break;
+        }
+
+        return pieceMoves;
+    }
+
+    private List<ChessMove> GetPawnMoves(Board board)
+    {
+        List<ChessMove> moves = new List<ChessMove>();
+        Vector2Int direction = teamColor == TeamColor.White ? new Vector2Int(0, 1) : new Vector2Int(0, -1);
+        Vector2Int step = Position + direction;
+
+        if (!board.ContainsPosition(step)) return moves;
+
+        if (board.GetPiece(step) == null)
+        {
+            ChessMove move = new ChessMove()
             {
-                return true;
+                destination = new Vector2Int(step.x, step.y),
+                origin = new Vector2Int(Position.x, Position.y),
+                pathSteps = new List<Vector2Int>()
+            };
+
+            moves.Add(move);
+
+            if (!hasMoved)
+            {
+                ChessMove doubleMove = new ChessMove()
+                {
+                    destination = step + direction,
+                    origin = new Vector2Int(Position.x, Position.y),
+                    pathSteps = new List<Vector2Int> { step }
+                };
+
+                moves.Add(doubleMove);
             }
         }
 
-        return false;
+        AddIfEnemy(step + Vector2Int.left, board, moves);
+        AddIfEnemy(step + Vector2Int.right, board, moves);
+
+        return moves;
+    }
+    private void AddIfEnemy(Vector2Int position, Board board, List<ChessMove> moves)
+    {
+        if (!board.ContainsPosition(position))
+        {
+            return;
+        }
+
+        Piece piece = board.GetPiece(position);
+
+        if (piece == null)
+        {
+            return;
+        }
+
+        if (piece.teamColor == teamColor)
+        {
+            return;
+        }
+
+        ChessMove move = new ChessMove()
+        {
+            destination = new Vector2Int(position.x, position.y),
+            origin = new Vector2Int(Position.x, Position.y),
+            pathSteps = new List<Vector2Int>()
+        };
+
+        moves.Add(move);
     }
 
-    public void ApplyOnPieceMove(Action<StatusEffect> applier) => onPieceMoveAppList.ApplyStatus(applier);
-    public void ApplyOnUpdate(Action<StatusEffect> applier) => onUpdateAppList.ApplyStatus(applier);
-    public void ApplyOnGameUpdate(Action<StatusEffect> applier) => onGameUpdateAppList.ApplyStatus(applier);
-    public void ApplyModifyMoves(Action<StatusEffect> applier) => modifyMoveAppList.ApplyStatus(applier);
+    private List<ChessMove> GetRookMoves(Board board)
+    {
+        return Rook.GetRookMoves(board, Position, teamColor);
+    }
+
+    private List<ChessMove> GetKnightMoves(Board board)
+    {
+        List<ChessMove> moves = new List<ChessMove>();
+
+        AddIfNoTeamate(moves, Position + Vector2Int.up + Vector2Int.up + Vector2Int.right, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.up + Vector2Int.up + Vector2Int.left, board, teamColor);
+
+        AddIfNoTeamate(moves, Position + Vector2Int.left + Vector2Int.left + Vector2Int.up, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.left + Vector2Int.left + Vector2Int.down, board, teamColor);
+
+        AddIfNoTeamate(moves, Position + Vector2Int.down + Vector2Int.down + Vector2Int.right, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.down + Vector2Int.down + Vector2Int.left, board, teamColor);
+
+        AddIfNoTeamate(moves, Position + Vector2Int.right + Vector2Int.right + Vector2Int.up, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.right + Vector2Int.right + Vector2Int.down, board, teamColor);
+
+        return moves;
+    }
+
+    private List<ChessMove> GetBishopMoves(Board board)
+    {
+        return Bishop.GetDiagonalMoves(board, Position, teamColor);
+    }
+
+    private List<ChessMove> GetQueenMoves(Board board)
+    {
+        List<ChessMove> bishopMoves = Bishop.GetDiagonalMoves(board, Position, teamColor);
+        bishopMoves.AddRange(Rook.GetRookMoves(board, Position, teamColor));
+        return bishopMoves;
+    }
+
+    private List<ChessMove> GetKingMoves(Board board)
+    {
+        List<ChessMove> moves = new List<ChessMove>();
+
+        AddIfNoTeamate(moves, Position + Vector2Int.up, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.down, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.left, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.right, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.up + Vector2Int.right, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.up + Vector2Int.left, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.down + Vector2Int.left, board, teamColor);
+        AddIfNoTeamate(moves, Position + Vector2Int.down + Vector2Int.right, board, teamColor);
+
+        return moves;
+    }
 }
-
-class StatusApplicationList
+[Serializable]
+public struct RankToMesh
 {
-    private readonly List<int> idPositions;
-    private readonly Func<StatusEffect, int> orderGetter;
-    private readonly StatusAcceptor acceptor;
-
-    public StatusApplicationList(Func<StatusEffect, int> orderGetter, StatusAcceptor acceptor)
-    {
-        idPositions = new();
-        this.orderGetter = orderGetter;
-        this.acceptor = acceptor;
-    }
-
-    public void AcceptStatus(int id, StatusEffect status)
-    {
-        int order = orderGetter.Invoke(status);
-
-        var head = 0;
-        for (; head < idPositions.Count && orderGetter.Invoke(acceptor.Stati[idPositions[head]]) < order; head++) ;
-
-        idPositions.Insert(head, id);
-    }
-
-    public void RemoveStatus(int id)
-    {
-        idPositions.Remove(id);
-    }
-
-    public void ApplyStatus(Action<StatusEffect> applier)
-    {
-        var idPClone = new List<int>();
-
-        for (int i = 0; i < idPositions.Count; i++)
-        {
-            idPClone.Add(idPositions[i]);
-        }
-
-        for (int i = 0; i < idPClone.Count; i++)
-        {
-            var id = idPClone[i];
-
-            if (!idPositions.Contains(id))
-            {
-                continue;
-            }
-
-            applier.Invoke(acceptor.Stati[id]);
-        }
-    }
+    public PieceType rank;
+    public Mesh mesh;
 }

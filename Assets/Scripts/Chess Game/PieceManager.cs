@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,11 +11,7 @@ public class PieceManager : MonoBehaviour
     [SerializeField] private TMP_Text pieceIcon;
 
     public Piece hoveredPiece;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    
 
     // Update is called once per frame
     void Update()
