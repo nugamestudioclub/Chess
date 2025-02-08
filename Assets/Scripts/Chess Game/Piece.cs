@@ -42,6 +42,7 @@ public abstract class Piece : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Rotation: " + transform.rotation + " name: " + gameObject.name);
         Renderer meshRenderer = GetComponent<Renderer>();
         if (meshRenderer != null)
         {
@@ -164,13 +165,13 @@ public abstract class Piece : MonoBehaviour
         {
             case TeamColor.White:
                 meshRenderer.material = whitePieceMaterial;
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 Debug.Log("RESET TRANSFORM 000");
 
                 break;
             case TeamColor.Black:
                 meshRenderer.material = blackPieceMaterial;
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
                 Debug.Log("RESET TRANSFORM 180");
 
                 break;

@@ -23,7 +23,7 @@ public class SquareSelectorCreator : MonoBehaviour
             {
                 counter++;
                 CreateSquareSelector(board, new Vector2Int(x, y));
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.01f);
             }
         }
 

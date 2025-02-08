@@ -103,11 +103,14 @@ public class Board : MonoBehaviour
         if (HasPiece(position)) return false;
 
         GameObject pieceObject = Instantiate(piecePrefab, transform);
+        
         GamePiece pieceComponent = pieceObject.GetComponent<GamePiece>();
+
 
         pieceComponent.pieceType = pt;
         pieceComponent.teamColor = tc;
         pieceComponent.UpdateVisual();
+        pieceObject.name = tc + " " + pt;
         
         Piece piece = pieceObject.GetComponent<Piece>();
         piece.SetPosition(position, PosToVect(position));
