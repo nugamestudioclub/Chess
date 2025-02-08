@@ -50,9 +50,11 @@ public class GamePiece : Piece
         {
             case TeamColor.White:
                 meshRenderer.material = whitePieceMaterial;
+                transform.rotation = Quaternion.identity;
                 break;
             case TeamColor.Black:
                 meshRenderer.material = blackPieceMaterial;
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
                 break;
         }
     }
