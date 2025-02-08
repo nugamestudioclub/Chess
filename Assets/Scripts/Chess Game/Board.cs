@@ -46,7 +46,8 @@ public class Board : MonoBehaviour
     #region gameloop
 
     private int numMoves = 0;
-    public int NumMoves 
+
+    public int NumMoves
     {
         get => numMoves;
         set => numMoves = value;
@@ -106,7 +107,7 @@ public class Board : MonoBehaviour
         piece.teamColor = tc;
         Debug.Log(position);
         pieces.Add(piece);
-        
+
         SetPieceGridID(pieces.Count - 1, position);
 
         return true;
@@ -192,17 +193,13 @@ public class Board : MonoBehaviour
                 {
                     piece.hovered = false;
                     piece.selected = false;
-                    
                 }
             }
-            
+
             yield return new WaitForEndOfFrame();
         }
 
         transform.eulerAngles = new Vector3(transform.rotation.x, initialYRot + 180f, transform.rotation.z);
-
-
-
     }
 
     float EaseInOutQuint(float x)
@@ -210,11 +207,11 @@ public class Board : MonoBehaviour
         float c5 = (2 * Mathf.PI) / 4.5f;
 
         return x == 0
-          ? 0
-          : x == 1
-          ? 1
-          : x < 0.5
-          ? -(Mathf.Pow(2, 20 * x - 10) * Mathf.Sin((20 * x - 11.125f) * c5)) / 2
-          : (Mathf.Pow(2, -20 * x + 10) * Mathf.Sin((20 * x - 11.125f) * c5)) / 2 + 1;
+            ? 0
+            : x == 1
+                ? 1
+                : x < 0.5
+                    ? -(Mathf.Pow(2, 20 * x - 10) * Mathf.Sin((20 * x - 11.125f) * c5)) / 2
+                    : (Mathf.Pow(2, -20 * x + 10) * Mathf.Sin((20 * x - 11.125f) * c5)) / 2 + 1;
     }
 }

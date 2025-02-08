@@ -29,31 +29,29 @@ public class ChessPlayer : MonoBehaviour
     public List<SquareSelector> squares = new List<SquareSelector>();
 
     [SerializeField] private Camera mainCam;
-    
+
     private void Awake()
     {
         instance = this;
-
     }
 
     private void Start()
     {
-        
         TeamTurnText.instance.SetTeamsTurnText(teamColor);
 
         board = Board.instance;
-        
+
         mainCam = Camera.main;
     }
 
     private void Update()
     {
-
         if (canClick && Input.GetMouseButtonDown(0))
         {
             ClearTileIndicators();
             HandleMouse();
         }
+
         HoverMouse();
         if (this.hovered)
         {
@@ -63,13 +61,12 @@ public class ChessPlayer : MonoBehaviour
         {
             this.board.showPieceInfo = false;
         }
+
         this.pieceManager.hoveredPiece = this.hoveredPiece;
-        
     }
 
     private void HoverMouse()
     {
-
         // Get mouse position
         Vector3 mousePosition = Input.mousePosition;
 
@@ -85,7 +82,6 @@ public class ChessPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Square")))
         {
-
             var selector = hit.collider.gameObject.GetComponent<SquareSelector>();
 
             if (selector == null)
@@ -94,6 +90,7 @@ public class ChessPlayer : MonoBehaviour
                 {
                     piece.hovered = false;
                 }
+
                 return;
             }
 
@@ -110,8 +107,10 @@ public class ChessPlayer : MonoBehaviour
                         piece.hovered = false;
                     }
                 }
+
                 return;
             }
+
             this.hovered = true;
             this.hoveredPiece.hovered = true;
             foreach (Piece piece in board.Pieces)
@@ -172,7 +171,7 @@ public class ChessPlayer : MonoBehaviour
             {
                 Debug.Log("new selected");
                 HandleNewSelecection(selector.position);
-            } 
+            }
             else
             {
                 Debug.Log("selected");
@@ -181,13 +180,12 @@ public class ChessPlayer : MonoBehaviour
 
             this.selectedPiece = this.board.GetPiece(selector.position);
 
-            
-            
+
             if (this.selectedPiece != null)
             {
                 this.selectedPiece.selected = true;
-                
             }
+
             foreach (Piece piece in board.Pieces)
             {
                 if (piece != null && piece != this.selectedPiece)
@@ -200,7 +198,7 @@ public class ChessPlayer : MonoBehaviour
         {
             ClearSelection();
         }
-        
+
         if (selectedPiece != null)
         {
             foreach (var move in selectedPiece.GetPossibleMoves(board))
@@ -217,9 +215,8 @@ public class ChessPlayer : MonoBehaviour
                                 square.ToggleCapturableTileIndicator(true);
                             }
                         }
-
-
                     }
+
                     if (square.position == move.destination)
                     {
                         square.ToggleMoveTileIndicator(true);
@@ -228,8 +225,8 @@ public class ChessPlayer : MonoBehaviour
                             square.ToggleCapturableTileIndicator(true);
                         }
                     }
-                    
                 }
+
                 Debug.Log("destination " + move.destination);
             }
         }
@@ -296,8 +293,7 @@ public class ChessPlayer : MonoBehaviour
 
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
 
-                
-                
+
                 this.selectedPiece = null;
 
                 ClearSelection();
@@ -317,8 +313,9 @@ public class ChessPlayer : MonoBehaviour
             this.selectedPiece.selected = false;
             this.selectedPiece = null;
         }
+
         potentialMoves.Clear();
-        
+
         selectedLocation = new Vector2Int(-1, -1);
     }
 
@@ -330,7 +327,6 @@ public class ChessPlayer : MonoBehaviour
 
     public void ClearTileIndicators()
     {
-        
         foreach (SquareSelector square in squares)
         {
             square.ToggleMoveTileIndicator(false);

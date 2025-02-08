@@ -69,12 +69,14 @@ public abstract class Piece : MonoBehaviour
         statusManager.ApplyOnUpdate((effect) => effect.Props.OnUpdate(effect, this));
     }
 
-    public static void AppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board, TeamColor teamColor)
+    public static void AppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board,
+        TeamColor teamColor)
     {
         DoAppendLine(pos, diagonal, step, moves, board, new List<Vector2Int>(), pos, teamColor);
     }
 
-    public static void DoAppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board, List<Vector2Int> path, Vector2Int origin, TeamColor teamColor)
+    public static void DoAppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board,
+        List<Vector2Int> path, Vector2Int origin, TeamColor teamColor)
     {
         Vector2Int checkPos = pos + (diagonal * step);
 
@@ -207,6 +209,7 @@ public class StatusAcceptor
                 return true;
             }
         }
+
         return false;
     }
 

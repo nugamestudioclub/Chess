@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="EventManager", menuName = "Events/EventManager")]
+[CreateAssetMenu(fileName = "EventManager", menuName = "Events/EventManager")]
 public class EventManager : ScriptableObject
 {
     public StatusEffectData statusData;
@@ -45,7 +45,7 @@ public class EventManager : ScriptableObject
     }
 
     private List<int> availableEvents = new();
-    
+
 
     public void CalcAvailable()
     {
@@ -57,7 +57,7 @@ public class EventManager : ScriptableObject
             }
 
             var evt = events[i];
-            if(evt != null)
+            if (evt != null)
             {
                 Debug.Log(evt.name);
 
@@ -77,7 +77,6 @@ public class EventManager : ScriptableObject
                 }
 
                 availableEvents.Add(i);
-                
             }
         }
     }

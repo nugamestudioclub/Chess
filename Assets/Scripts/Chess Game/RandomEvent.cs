@@ -11,7 +11,10 @@ public abstract class RandomEventSO : ScriptableObject
     public List<RandomEventSO> coreqEvents;
 
     [SerializeField] private int excludeBeforeMove = 0; // before this move, event cannot be selected
-    [SerializeField] private int excludeBeforeEventCount = 0; // event can only be triggered after this number of events have been triggered
+
+    [SerializeField]
+    private int
+        excludeBeforeEventCount = 0; // event can only be triggered after this number of events have been triggered
 
     public int ExcludeBeforeMove => excludeBeforeMove;
     public int ExcludeBeforeEventCount => excludeBeforeEventCount;
@@ -19,12 +22,14 @@ public abstract class RandomEventSO : ScriptableObject
 
 public abstract class LinkRandomSO<Event> : RandomEventSO where Event : RandomEvent, new()
 {
-    public override RandomEvent LinkedEventGen(EventManager manager, TeamColor tc, Board board) => RandomEvent.Gen<Event>(manager, this, tc, board);
+    public override RandomEvent LinkedEventGen(EventManager manager, TeamColor tc, Board board) =>
+        RandomEvent.Gen<Event>(manager, this, tc, board);
 }
 
 public abstract class RandomEvent
 {
-    public static RandomEvent Gen<EventType>(EventManager manager, RandomEventSO spawner, TeamColor tc, Board board) where EventType : RandomEvent, new()
+    public static RandomEvent Gen<EventType>(EventManager manager, RandomEventSO spawner, TeamColor tc, Board board)
+        where EventType : RandomEvent, new()
     {
         EventType evt = new();
         evt.manager = manager;
@@ -76,6 +81,7 @@ public class ListOfEventTypes
         throw new IndexOutOfRangeException();
     }
 }
+
 public class HashSetOfEventTypes
 {
     private HashSet<Type> typeSet = new();

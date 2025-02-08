@@ -18,6 +18,7 @@ public class PieceCreator : ScriptableObject
     [SerializeField] private GameObject wRook;
     [SerializeField] private GameObject wQueen;
     [SerializeField] private GameObject wKing;
+
     public GameObject CreatePiece(PieceType pt, Transform parent, TeamColor tc)
     {
         GameObject pieceToSpawn;
@@ -33,6 +34,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wPawn;
                 }
+
                 break;
             case PieceType.Bishop:
                 if (tc == TeamColor.Black)
@@ -43,6 +45,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wBishop;
                 }
+
                 break;
             case PieceType.Knight:
                 if (tc == TeamColor.Black)
@@ -53,6 +56,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wKnight;
                 }
+
                 break;
             case PieceType.Rook:
                 if (tc == TeamColor.Black)
@@ -63,6 +67,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wRook;
                 }
+
                 break;
             case PieceType.Queen:
                 if (tc == TeamColor.Black)
@@ -73,6 +78,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wQueen;
                 }
+
                 break;
             case PieceType.King:
                 if (tc == TeamColor.Black)
@@ -83,6 +89,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wKing;
                 }
+
                 break;
             default:
                 if (tc == TeamColor.Black)
@@ -93,6 +100,7 @@ public class PieceCreator : ScriptableObject
                 {
                     pieceToSpawn = wPawn;
                 }
+
                 break;
         }
 

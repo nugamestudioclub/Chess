@@ -13,7 +13,6 @@ public class SquareSelectorCreator : MonoBehaviour
     public void CreateSquareSelectors(Board board)
     {
         StartCoroutine(CreateSquareDelay(board));
-
     }
 
     private IEnumerator CreateSquareDelay(Board board)
@@ -46,7 +45,6 @@ public class SquareSelectorCreator : MonoBehaviour
         selector.transform.localScale = new Vector3(size.x, .05f, size.z);
 
         var square = selector.GetComponent<SquareSelector>();
-        
 
 
         bool xEven = position.x % 2 == 0;

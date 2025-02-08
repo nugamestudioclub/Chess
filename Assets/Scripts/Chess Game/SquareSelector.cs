@@ -13,13 +13,10 @@ public class SquareSelector : MonoBehaviour
     {
         moveTileIndicator.SetActive(enabled);
     }
-    
-    
+
+
     public void ToggleCapturableTileIndicator(bool enabled)
     {
         capturableTileIndicator.SetActive(enabled);
     }
-
-
-    
 }
