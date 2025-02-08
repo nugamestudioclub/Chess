@@ -160,15 +160,20 @@ public abstract class Piece : MonoBehaviour
 
     public void UpdateVisual()
     {
-        if (meshFilter == null)
+        switch (teamColor)
         {
-            Debug.LogError("MeshFilter is not assigned on " + gameObject.name);
-            return;
-        }
-        if (meshRenderer == null)
-        {
-            Debug.LogError("MeshRenderer is not assigned on " + gameObject.name);
-            return;
+            case TeamColor.White:
+                meshRenderer.material = whitePieceMaterial;
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                Debug.Log("RESET TRANSFORM 000");
+
+                break;
+            case TeamColor.Black:
+                meshRenderer.material = blackPieceMaterial;
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                Debug.Log("RESET TRANSFORM 180");
+
+                break;
         }
 
         RankToMesh rankToMesh = rankToMeshes.Find(rtm => rtm.rank == pieceType);
@@ -181,17 +186,7 @@ public abstract class Piece : MonoBehaviour
             Debug.LogError($"No mesh found for {pieceType} in {gameObject.name}");
         }
 
-        switch (teamColor)
-        {
-            case TeamColor.White:
-                meshRenderer.material = whitePieceMaterial;
-                transform.rotation = Quaternion.identity;
-                break;
-            case TeamColor.Black:
-                meshRenderer.material = blackPieceMaterial;
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-                break;
-        }
+
     }
 
     public virtual List<ChessMove> GetDefaultMoves(Board board)

@@ -33,7 +33,8 @@ public static class RandomGameEvent
     public static void InitializeDescriptions()
     {
         randomStatusDescriptions[RandomStatus.None] = "No status effects";
-        randomStatusDescriptions[RandomStatus.Lesbian] = "Piece turns into a queen";
+        randomStatusDescriptions[RandomStatus.Lesbian] = "Piece turns into a Queen";
+        randomStatusDescriptions[RandomStatus.Convert] = "Bishop turns into a Knight";
     }
     
     // Call a random event for a piece
@@ -47,24 +48,38 @@ public static class RandomGameEvent
         // Trigger a random event
         if (Random.Range(0, 5) < 1)
         {
-            Debug.Log("Default event called");
             piece.status = RandomStatus.None;
         }
         else
         {
-            piece.pieceType = PieceType.Queen;
-            piece.UpdateVisual();
-            piece.status = RandomStatus.Lesbian;
+            if (piece.pieceType == PieceType.Bishop)
+            {
+                piece.status = RandomStatus.Convert;
+                piece.pieceType = PieceType.Knight;
+            }
+            else
+            {
+                piece.status = RandomStatus.Lesbian;
+                piece.pieceType = PieceType.Queen;
+            }
+
         }
+         
+        Debug.Log("TEAM COLOR BEFORE " + piece.teamColor);
+        piece.UpdateVisual();
+        Debug.Log("TEAM COLOR AFTER " + piece.teamColor);
 
         // Print the description of the status
         Debug.Log(randomStatusDescriptions[piece.status]);
     }
+
+
 }
 
 // Enum representing random statuses
 public enum RandomStatus
 {
     None,
-    Lesbian
+    Lesbian,
+    Convert
 }

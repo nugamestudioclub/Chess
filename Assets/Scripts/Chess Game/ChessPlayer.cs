@@ -282,7 +282,7 @@ public class ChessPlayer : MonoBehaviour
 
                 var selPiece = board.GetPiece(selectedLocation);
                 
-                RandomGameEvent.CallRandomEvent(selPiece);
+
                 if (selPiece.statusManager.HasStatusType<NewHire>())
                 {
                     Debug.Log("moved piece with nh");
@@ -294,10 +294,10 @@ public class ChessPlayer : MonoBehaviour
                         sentMove = potentialMoves[newMoveIndex];
                     }
                 }
-
+                
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
-
-
+                RandomGameEvent.CallRandomEvent(board.GetPiece(selectedLocation));
+                
                 this.selectedPiece = null;
 
                 ClearSelection();
