@@ -16,7 +16,7 @@ public class TeamTurnText : MonoBehaviour
     {
         instance = this;
     }
-
+//
     public void SetTeamsTurnText(TeamColor team)
     {
         teamsTurnText.text = team + "'s " + "Turn";
