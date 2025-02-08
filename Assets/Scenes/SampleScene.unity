@@ -460,7 +460,10 @@ MonoBehaviour:
   m_text: 'Queen (White)
 
 
-    Status Effects:'
+    Status Effects: None
+
+    Description: No status effects
+    applied'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73e17bfaa2eb56942837e35e98dbb76e, type: 2}
   m_sharedMaterial: {fileID: 996455295679708713, guid: 73e17bfaa2eb56942837e35e98dbb76e, type: 2}
@@ -487,7 +490,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.3
+  m_fontSize: 20
   m_fontSizeBase: 261.3
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -525,7 +528,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 15, y: 15, z: 60, w: 15}
+  m_margin: {x: 15, y: 15, z: 15, w: 15}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

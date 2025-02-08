@@ -228,6 +228,8 @@ public class ChessPlayer : MonoBehaviour
                 }
 
                 Debug.Log("destination " + move.destination);
+                
+
             }
         }
     }
@@ -248,13 +250,13 @@ public class ChessPlayer : MonoBehaviour
 
         potentialMoves = piece.GetPossibleMoves(board);
         // display potential moves
+        Debug.Log("Handle new selection 253");
     }
 
     private void HandleCurrentlySelected(Vector2Int pos)
     {
         Piece current = board.GetPiece(selectedLocation);
         Piece piece = board.GetPiece(pos);
-
         if (piece != null)
         {
             if (piece.teamColor == current.teamColor)
@@ -270,6 +272,7 @@ public class ChessPlayer : MonoBehaviour
             return;
         }
 
+        
         foreach (ChessMove move in potentialMoves)
         {
             if (move.destination == pos)
@@ -278,7 +281,8 @@ public class ChessPlayer : MonoBehaviour
                 //board.SetPiecePosition(board.GetPieceID(selectedLocation), pos);
 
                 var selPiece = board.GetPiece(selectedLocation);
-
+                
+                RandomGameEvent.CallRandomEvent(selPiece);
                 if (selPiece.statusManager.HasStatusType<NewHire>())
                 {
                     Debug.Log("moved piece with nh");
@@ -301,7 +305,6 @@ public class ChessPlayer : MonoBehaviour
                 return;
             }
         }
-
         ClearSelection();
     }
 
