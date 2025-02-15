@@ -40,7 +40,7 @@ public class ChessPlayer : MonoBehaviour
         TeamTurnText.instance.SetTeamsTurnText(teamColor);
 
         board = Board.instance;
-
+// thing
         mainCam = Camera.main;
     }
 
@@ -296,7 +296,7 @@ public class ChessPlayer : MonoBehaviour
                 }
                 
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
-                RandomGameEvent.CallRandomEvent(selPiece);
+                //RandomGameEvent.GetRandomStatus();
                 
                 this.selectedPiece = null;
 

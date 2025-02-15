@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,13 +39,24 @@ public static class RandomGameEvent
     }
     
     // Call a random event for a piece
-    public static void CallRandomEvent(Piece piece)
+    public static RandomStatus GetRandomStatus()
     {
-        // Initialize descriptions if not already done
+        int index = Random.Range(0, randomStatusDescriptions.Count);
+
+
+        RandomStatus randomStatus = randomStatusDescriptions.ElementAt(index).Key;
+        string randomDescription = randomStatusDescriptions.ElementAt(index).Value;
+
+        
+        
         if (randomStatusDescriptions.Count == 0)
         {
             InitializeDescriptions();
         }
+        
+        return randomStatus;
+        
+        /*
         // Trigger a random event
         if (Random.Range(0, 5) < 1)
         {
@@ -64,13 +76,23 @@ public static class RandomGameEvent
             }
 
         }
+        
+        if (Random.Range(0, 5) < 1)
+        {
+        }
+        else
+        {
+            
+        }*/
+
          
+        /*
         Debug.Log("TEAM COLOR BEFORE " + piece.teamColor);
         piece.UpdateVisual();
         Debug.Log("TEAM COLOR AFTER " + piece.teamColor);
 
         // Print the description of the status
-        Debug.Log(randomStatusDescriptions[piece.status]);
+        Debug.Log(randomStatusDescriptions[piece.status]);*/
     }
 
 
