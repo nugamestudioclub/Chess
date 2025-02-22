@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public static class RandomGameEvent
 {
 
+    private static List<ARedditComment> redditComments = new List<ARedditComment>();
+    
     // Dictionary to hold descriptions for each status
     private static Dictionary<RandomStatus, string> randomStatusDescriptions = new Dictionary<RandomStatus, string>();
 
@@ -33,10 +35,50 @@ public static class RandomGameEvent
     // Method to initialize the status descriptions
     public static void InitializeDescriptions()
     {
+        
         randomStatusDescriptions[RandomStatus.None] = "No status effects";
         randomStatusDescriptions[RandomStatus.Lesbian] = "Piece turns into a Queen";
         randomStatusDescriptions[RandomStatus.Convert] = "Bishop turns into a Knight";
     }
+    
+    public static void InitializeRedditComments()
+    {
+        redditComments.Clear();
+        redditComments.Add(new Convert());
+        redditComments.Add(new Lesbian());
+        redditComments.Add(new  Spleef());
+    }
+    
+    
+    // Call a random event for a piece
+    public static void CallRandomEvent(Piece piece)
+    {
+        // Initialize descriptions if not already done
+        if (randomStatusDescriptions.Count == 0)
+        {
+            InitializeDescriptions();
+        }
+
+
+        if (redditComments.Count == 0)
+        {
+            InitializeRedditComments();
+        }
+
+        redditComments[Random.Range(0, redditComments.Count)].SaySomeDumbShit(piece);
+
+        // square selector position
+
+
+        Debug.Log("TEAM COLOR BEFORE " + piece.teamColor);
+        piece.UpdateVisual();
+        Debug.Log("TEAM COLOR AFTER " + piece.teamColor);
+
+        // Print the description of the status
+        Debug.Log(randomStatusDescriptions[piece.status]);
+    }
+
+
     
     // Call a random event for a piece
     public static RandomStatus GetRandomStatus()
