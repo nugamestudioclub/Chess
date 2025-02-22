@@ -7,7 +7,7 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     const int EMPTY_SPACE = -1;
-    
+
     [SerializeField] private BoardLayout layout;
     [SerializeField] private SquareSelectorCreator squareCreator;
 
@@ -103,7 +103,7 @@ public class Board : MonoBehaviour
         if (HasPiece(position)) return false;
 
         GameObject pieceObject = Instantiate(piecePrefab, transform);
-        
+
         GamePiece pieceComponent = pieceObject.GetComponent<GamePiece>();
 
 
@@ -111,7 +111,7 @@ public class Board : MonoBehaviour
         pieceComponent.teamColor = tc;
         pieceComponent.UpdateVisual();
         pieceObject.name = tc + " " + pt;
-        
+
         Piece piece = pieceObject.GetComponent<Piece>();
         piece.SetPosition(position, PosToVect(position));
         piece.teamColor = tc;

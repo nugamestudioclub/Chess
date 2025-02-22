@@ -12,8 +12,7 @@ public abstract class RandomEventSO : ScriptableObject
 
     [SerializeField] private int excludeBeforeMove = 0; // before this move, event cannot be selected
 
-    [SerializeField]
-    private int
+    [SerializeField] private int
         excludeBeforeEventCount = 0; // event can only be triggered after this number of events have been triggered
 
     public int ExcludeBeforeMove => excludeBeforeMove;

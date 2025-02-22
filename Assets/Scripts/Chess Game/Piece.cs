@@ -4,12 +4,11 @@ using UnityEngine;
 
 public abstract class Piece : MonoBehaviour
 {
-    
     public PieceType pieceType = PieceType.Pawn;
     public Vector2Int Position { get; private set; }
 
     public TeamColor teamColor;
-    
+
     public bool hasMoved = false;
     public bool selected = false;
     public bool hovered = false;
@@ -64,7 +63,6 @@ public abstract class Piece : MonoBehaviour
             {
                 meshRenderer.materials[1].SetColor("_Color", new Color(255, 255, 255));
             }
-            
         }
 
 
@@ -140,7 +138,7 @@ public abstract class Piece : MonoBehaviour
 
         moves.Add(move);
     }
-    
+
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshFilter meshFilter;
 
@@ -148,7 +146,7 @@ public abstract class Piece : MonoBehaviour
     [SerializeField] private Material blackPieceMaterial;
 
     public List<RankToMesh> rankToMeshes = new List<RankToMesh>();
-    
+
     private void OnEnable()
     {
         UpdateVisual();
@@ -186,14 +184,12 @@ public abstract class Piece : MonoBehaviour
         {
             Debug.LogError($"No mesh found for {pieceType} in {gameObject.name}");
         }
-
-
     }
 
     public virtual List<ChessMove> GetDefaultMoves(Board board)
     {
         List<ChessMove> pieceMoves = new List<ChessMove>();
-        
+
         switch (pieceType)
         {
             case PieceType.Pawn:
@@ -256,6 +252,7 @@ public abstract class Piece : MonoBehaviour
 
         return moves;
     }
+
     private void AddIfEnemy(Vector2Int position, Board board, List<ChessMove> moves)
     {
         if (!board.ContainsPosition(position))
@@ -337,6 +334,7 @@ public abstract class Piece : MonoBehaviour
         return moves;
     }
 }
+
 [Serializable]
 public struct RankToMesh
 {

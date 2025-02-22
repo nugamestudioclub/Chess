@@ -11,7 +11,7 @@ public class PieceManager : MonoBehaviour
     [SerializeField] private TMP_Text pieceIcon;
 
     public Piece hoveredPiece;
-    
+
 
     // Update is called once per frame
     void Update()
@@ -28,60 +28,62 @@ public class PieceManager : MonoBehaviour
             displayText = displayText + statusEffect.ToString() + "\n";
         }
 
-        displayText = displayText + hoveredPiece.status + "\n" + "Description: " + RandomGameEvent.GetDescription(hoveredPiece.status);
+        displayText = displayText + hoveredPiece.status + "\n" + "Description: " +
+                      RandomGameEvent.GetDescription(hoveredPiece.status);
 
         pieceIcon.text = "";
 
         string pieceIconFont = "";
-        
-        if(this.hoveredPiece.teamColor == TeamColor.Black)
+
+        if (this.hoveredPiece.teamColor == TeamColor.Black)
         {
             switch (this.hoveredPiece.pieceType)
             {
                 case PieceType.King:
-                    pieceIconFont = "k";                
+                    pieceIconFont = "k";
                     break;
                 case PieceType.Queen:
-                    pieceIconFont = "q";               
+                    pieceIconFont = "q";
                     break;
                 case PieceType.Rook:
-                    pieceIconFont = "r"; 
+                    pieceIconFont = "r";
                     break;
                 case PieceType.Bishop:
-                    pieceIconFont = "b"; 
+                    pieceIconFont = "b";
                     break;
                 case PieceType.Knight:
-                    pieceIconFont = "h"; 
+                    pieceIconFont = "h";
                     break;
                 case PieceType.Pawn:
-                    pieceIconFont = "p";               
+                    pieceIconFont = "p";
                     break;
             }
         }
-        else if(this.hoveredPiece.teamColor == TeamColor.White)
+        else if (this.hoveredPiece.teamColor == TeamColor.White)
         {
-               switch (this.hoveredPiece.pieceType)
+            switch (this.hoveredPiece.pieceType)
             {
                 case PieceType.King:
-                    pieceIconFont = "l";                
+                    pieceIconFont = "l";
                     break;
                 case PieceType.Queen:
-                    pieceIconFont = "w";                
+                    pieceIconFont = "w";
                     break;
                 case PieceType.Rook:
-                    pieceIconFont = "t"; 
+                    pieceIconFont = "t";
                     break;
                 case PieceType.Bishop:
-                    pieceIconFont = "n"; 
+                    pieceIconFont = "n";
                     break;
                 case PieceType.Knight:
-                    pieceIconFont = "j"; 
+                    pieceIconFont = "j";
                     break;
                 case PieceType.Pawn:
-                    pieceIconFont = "o";               
+                    pieceIconFont = "o";
                     break;
             }
         }
+
         pieceIcon.text += pieceIconFont;
 
         this.pieceInfoText.SetText(displayText);

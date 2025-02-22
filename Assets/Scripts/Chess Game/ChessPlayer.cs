@@ -228,8 +228,6 @@ public class ChessPlayer : MonoBehaviour
                 }
 
                 Debug.Log("destination " + move.destination);
-                
-
             }
         }
     }
@@ -272,7 +270,7 @@ public class ChessPlayer : MonoBehaviour
             return;
         }
 
-        
+
         foreach (ChessMove move in potentialMoves)
         {
             if (move.destination == pos)
@@ -281,7 +279,9 @@ public class ChessPlayer : MonoBehaviour
                 //board.SetPiecePosition(board.GetPieceID(selectedLocation), pos);
 
                 var selPiece = board.GetPiece(selectedLocation);
-                
+
+                Debug.Log("Set piece position");
+
 
                 if (selPiece.statusManager.HasStatusType<NewHire>())
                 {
@@ -294,10 +294,10 @@ public class ChessPlayer : MonoBehaviour
                         sentMove = potentialMoves[newMoveIndex];
                     }
                 }
-                
-                board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
+
                 RandomGameEvent.CallRandomEvent(selPiece);
-                
+                board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
+
                 this.selectedPiece = null;
 
                 ClearSelection();
@@ -305,6 +305,7 @@ public class ChessPlayer : MonoBehaviour
                 return;
             }
         }
+
         ClearSelection();
     }
 

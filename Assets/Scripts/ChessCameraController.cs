@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class ChessCameraController : MonoBehaviour
@@ -19,7 +18,7 @@ public class ChessCameraController : MonoBehaviour
     private bool reset = true;
 
     private bool atStartingPoint = true;
-    
+
     private void Start()
     {
         if (target == null)

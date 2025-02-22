@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TeamTurnText : MonoBehaviour
 {
-    
     [SerializeField] private TextMeshProUGUI teamsTurnText;
 
     [SerializeField] private Material whiteMaterial;
@@ -16,6 +15,7 @@ public class TeamTurnText : MonoBehaviour
     {
         instance = this;
     }
+
 //
     public void SetTeamsTurnText(TeamColor team)
     {
