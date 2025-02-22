@@ -295,7 +295,10 @@ public class ChessPlayer : MonoBehaviour
                     }
                 }
                 
+                RandomGameEvent.CallRandomEvent(selPiece);
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
+
+                
                 //RandomGameEvent.GetRandomStatus();
                 
                 this.selectedPiece = null;

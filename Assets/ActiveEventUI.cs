@@ -15,8 +15,8 @@ public class ActiveEventUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI activeEventText;
 
 
-    public void SetActiveEventText(RandomStatus evt)
+    public void SetActiveEventText(string name, string desc)
     {
-        activeEventText.text = "Event: " + evt + "\n Description: " + RandomGameEvent.GetDescription(evt);
+        activeEventText.text = "Event: " + name + "\n Description: " + desc;
     }
 }

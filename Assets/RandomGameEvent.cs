@@ -47,6 +47,7 @@ public static class RandomGameEvent
         redditComments.Add(new Convert());
         redditComments.Add(new Lesbian());
         redditComments.Add(new  Spleef());
+        //redditComments.Add(new  NullStatus());
     }
     
     
@@ -64,9 +65,11 @@ public static class RandomGameEvent
         {
             InitializeRedditComments();
         }
+        int randomComment = Random.Range(0, redditComments.Count);
 
-        redditComments[Random.Range(0, redditComments.Count)].SaySomeDumbShit(piece);
+        redditComments[randomComment].SaySomeDumbShit(piece);
 
+        ActiveEventUI.instance.SetActiveEventText(redditComments[randomComment].name, redditComments[randomComment].description);
         // square selector position
 
 
@@ -79,63 +82,6 @@ public static class RandomGameEvent
     }
 
 
-    
-    // Call a random event for a piece
-    public static RandomStatus GetRandomStatus()
-    {
-        int index = Random.Range(0, randomStatusDescriptions.Count);
-
-
-        RandomStatus randomStatus = randomStatusDescriptions.ElementAt(index).Key;
-        string randomDescription = randomStatusDescriptions.ElementAt(index).Value;
-
-        
-        
-        if (randomStatusDescriptions.Count == 0)
-        {
-            InitializeDescriptions();
-        }
-        
-        return randomStatus;
-        
-        /*
-        // Trigger a random event
-        if (Random.Range(0, 5) < 1)
-        {
-            piece.status = RandomStatus.None;
-        }
-        else
-        {
-            if (piece.pieceType == PieceType.Bishop)
-            {
-                piece.status = RandomStatus.Convert;
-                piece.pieceType = PieceType.Knight;
-            }
-            else
-            {
-                piece.status = RandomStatus.Lesbian;
-                piece.pieceType = PieceType.Queen;
-            }
-
-        }
-        
-        if (Random.Range(0, 5) < 1)
-        {
-        }
-        else
-        {
-            
-        }*/
-
-         
-        /*
-        Debug.Log("TEAM COLOR BEFORE " + piece.teamColor);
-        piece.UpdateVisual();
-        Debug.Log("TEAM COLOR AFTER " + piece.teamColor);
-
-        // Print the description of the status
-        Debug.Log(randomStatusDescriptions[piece.status]);*/
-    }
 
 
 }
