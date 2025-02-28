@@ -92,7 +92,6 @@ public class ChessController
 
         activePlayer = activePlayer == TeamColor.White ? TeamColor.Black : TeamColor.White;
         UpdateGame();
-
         return true;
     }
 

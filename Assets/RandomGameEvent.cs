@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public static class RandomGameEvent
 {
+
+    private static List<ARedditComment> redditComments = new List<ARedditComment>();
+    
     // Dictionary to hold descriptions for each status
     private static Dictionary<RandomStatus, string> randomStatusDescriptions = new Dictionary<RandomStatus, string>();
 
@@ -16,7 +20,7 @@ public static class RandomGameEvent
         {
             InitializeDescriptions();
         }
-
+        
         // Check if the status exists in the dictionary
         if (randomStatusDescriptions.ContainsKey(status))
         {
@@ -24,19 +28,29 @@ public static class RandomGameEvent
         }
         else
         {
-            return "Description not found for this status."; // Default message if status is not found
+            return "Description not found for this status.";  // Default message if status is not found
         }
     }
-
+    
     // Method to initialize the status descriptions
     public static void InitializeDescriptions()
     {
+        
         randomStatusDescriptions[RandomStatus.None] = "No status effects";
         randomStatusDescriptions[RandomStatus.Lesbian] = "Piece turns into a Queen";
         randomStatusDescriptions[RandomStatus.Convert] = "Bishop turns into a Knight";
     }
-
-
+    
+    public static void InitializeRedditComments()
+    {
+        redditComments.Clear();
+        redditComments.Add(new Convert());
+        redditComments.Add(new Lesbian());
+        redditComments.Add(new  Spleef());
+        redditComments.Add(new  NullStatus());
+    }
+    
+    
     // Call a random event for a piece
     public static void CallRandomEvent(Piece piece)
     {
@@ -46,35 +60,16 @@ public static class RandomGameEvent
             InitializeDescriptions();
         }
 
-        // Trigger a random event
-        if (Random.Range(0, 5) < 1)
+
+        if (redditComments.Count == 0)
         {
-            piece.status = RandomStatus.None;
+            InitializeRedditComments();
         }
-        else
-        {
-            if (piece.pieceType == PieceType.Bishop)
-            {
-                piece.status = RandomStatus.Convert;
-                piece.pieceType = PieceType.Knight;
-            }
-            else
-            {
-                piece.status = RandomStatus.Lesbian;
-                piece.pieceType = PieceType.Queen;
-            }
-        }
+        int randomComment = Random.Range(0, redditComments.Count);
 
-            foreach (var sqr in ChessPlayer.instance.squares)
-            {
-                if (sqr.position == piece.Position)
-                {
-                    sqr.gameObject.SetActive(false);
-                }
-            }
-    
+        redditComments[randomComment].SaySomeDumbShit(piece);
 
-
+        ActiveEventUI.instance.SetActiveEventText(redditComments[randomComment].GetName(), redditComments[randomComment].GetDescription());
         // square selector position
 
 
@@ -85,6 +80,10 @@ public static class RandomGameEvent
         // Print the description of the status
         Debug.Log(randomStatusDescriptions[piece.status]);
     }
+
+
+
+
 }
 
 // Enum representing random statuses
