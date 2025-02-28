@@ -47,7 +47,7 @@ public static class RandomGameEvent
         redditComments.Add(new Convert());
         redditComments.Add(new Lesbian());
         redditComments.Add(new  Spleef());
-        //redditComments.Add(new  NullStatus());
+        redditComments.Add(new  NullStatus());
     }
     
     
@@ -69,7 +69,7 @@ public static class RandomGameEvent
 
         redditComments[randomComment].SaySomeDumbShit(piece);
 
-        ActiveEventUI.instance.SetActiveEventText(redditComments[randomComment].name, redditComments[randomComment].description);
+        ActiveEventUI.instance.SetActiveEventText(redditComments[randomComment].GetName(), redditComments[randomComment].GetDescription());
         // square selector position
 
 

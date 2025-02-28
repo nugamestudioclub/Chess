@@ -2,6 +2,15 @@ using UnityEngine;
 
 public class Convert : ARedditComment
 {
+    public override string GetName()
+    {
+        return "Convert";
+    }
+
+    public override string GetDescription()
+    {
+        return "A bishop on your side converts to a knight";
+    }
 
     public override void SaySomeDumbShit(Piece piece)
     {

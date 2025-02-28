@@ -17,6 +17,6 @@ public class ActiveEventUI : MonoBehaviour
 
     public void SetActiveEventText(string name, string desc)
     {
-        activeEventText.text = "Event: " + name + "\n Description: " + desc;
+        activeEventText.text = "Event: " + name + "\nDescription: " + desc;
     }
 }

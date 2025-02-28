@@ -1,10 +1,14 @@
 using UnityEngine;
 
-public abstract class ARedditComment{
+public abstract class ARedditComment
+{
 
-    public string name;
+    public abstract string GetName();
 
-    public string description;
+    public abstract string GetDescription();
+
+    
+    
     
     public abstract void SaySomeDumbShit(Piece piece);
     
