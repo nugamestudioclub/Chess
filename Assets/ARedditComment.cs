@@ -7,7 +7,11 @@ public abstract class ARedditComment
     public abstract string GetDescription();
 
     public abstract int GetDuration();
-    
+
     public abstract void SaySomeDumbShit(Piece piece);
-    
+
+    public virtual void PlayEffectParticles(Piece piece)
+    {
+        piece.effectParticles.Play();
+    }
 }

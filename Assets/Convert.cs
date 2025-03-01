@@ -38,6 +38,7 @@ public class Convert : ARedditComment
                     p.status = RandomStatus.Convert;
                     p.pieceType = PieceType.Knight;
                     p.UpdateVisual();
+                    PlayEffectParticles(p);
                     return;
                 }
             }

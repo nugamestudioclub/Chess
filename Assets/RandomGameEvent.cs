@@ -7,10 +7,10 @@ using Random = UnityEngine.Random;
 public static class RandomGameEvent
 {
 
-    private static List<ARedditComment> redditComments = new List<ARedditComment>();
-    
+    public static List<ARedditComment> redditComments { get; private set; } = new List<ARedditComment>();
+
     // Dictionary to hold descriptions for each status
-    private static Dictionary<RandomStatus, string> randomStatusDescriptions = new Dictionary<RandomStatus, string>();
+    public static Dictionary<RandomStatus, string> randomStatusDescriptions  { get; private set; } = new Dictionary<RandomStatus, string>();
 
     // Custom method to get the description for a specific status
     public static string GetDescription(RandomStatus status)
@@ -49,10 +49,9 @@ public static class RandomGameEvent
         redditComments.Add(new  Spleef());
         redditComments.Add(new  NullStatus());
     }
-    
-    
-    // Call a random event for a piece
-    public static void CallRandomEvent(Piece piece)
+
+
+    public static void CallRandomEvent(Piece piece, int randomComment)
     {
         // Initialize descriptions if not already done
         if (randomStatusDescriptions.Count == 0)
@@ -65,10 +64,9 @@ public static class RandomGameEvent
         {
             InitializeRedditComments();
         }
-        int randomComment = Random.Range(0, redditComments.Count);
+
 
         redditComments[randomComment].SaySomeDumbShit(piece);
-
         // change UI (NOT SUPPOSED TO BE HERE)
         ActiveEventUI.instance.SetActiveEventText(redditComments[randomComment].GetName(), redditComments[randomComment].GetDescription());
         // square selector position
@@ -80,6 +78,18 @@ public static class RandomGameEvent
 
         // Print the description of the status
         Debug.Log(randomStatusDescriptions[piece.status]);
+    }
+
+
+
+    public static int nextRandomEventIndex { get; private set; } = 0;
+
+
+    // Call a random event for a piece
+    public static int GetNextRandomEvent()
+    {
+        nextRandomEventIndex = Random.Range(0, redditComments.Count);
+        return nextRandomEventIndex;
     }
 
 

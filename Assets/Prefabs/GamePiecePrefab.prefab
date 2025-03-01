@@ -108,8 +108,9 @@ MonoBehaviour:
   hasMoved: 0
   selected: 0
   hovered: 0
-  eventParticles: {fileID: 7497517017641420383}
+  effectParticles: {fileID: 7497517017641420383}
   status: 0
+  statuses: 
   meshRenderer: {fileID: 23353531918940410}
   meshFilter: {fileID: 33360194353735420}
   whitePieceMaterial: {fileID: 2100000, guid: 95607dbe2e7c3481c90296c75fb23104, type: 2}

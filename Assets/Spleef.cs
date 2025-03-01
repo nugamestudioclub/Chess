@@ -23,7 +23,6 @@ public class Spleef : ARedditComment
 
     public override void SaySomeDumbShit(Piece piece)
     {
-        /*
         foreach (var sqr in ChessPlayer.instance.squares)
         {
             if (sqr.position == piece.Position)
@@ -31,7 +30,7 @@ public class Spleef : ARedditComment
                 sqr.gameObject.SetActive(false);
             }
         }
-        */
+        PlayEffectParticles(piece);
         piece.status = RandomStatus.Spleef;
     }
 }

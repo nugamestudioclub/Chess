@@ -304,12 +304,13 @@ public class ChessPlayer : MonoBehaviour
                         }
                     }
                 }
-
                 
-                RandomGameEvent.CallRandomEvent(selPiece);
+                RandomGameEvent.CallRandomEvent(selPiece, RandomGameEvent.nextRandomEventIndex);
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
 
-                
+                RandomGameEvent.GetNextRandomEvent();
+                ActiveEventUI.instance.SetActiveEventText(RandomGameEvent.redditComments[RandomGameEvent.nextRandomEventIndex].GetName(), RandomGameEvent.redditComments[RandomGameEvent.nextRandomEventIndex].GetDescription());
+
                 //RandomGameEvent.GetRandomStatus();
                 
                 this.selectedPiece = null;
