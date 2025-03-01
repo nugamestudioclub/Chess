@@ -14,10 +14,14 @@ public abstract class Piece : MonoBehaviour
     public bool hovered = false;
 
     public StatusAcceptor statusManager = new();
+    public ParticleSystem eventParticles;
+
     public List<StatusEffect> statuses => statusManager.ToList();
 
     [HideInInspector] public RandomStatus status = RandomStatus.None;
 
+    
+    
     public void SetPosition(Vector2Int position, Vector3 worldPos)
     {
         Position = position;

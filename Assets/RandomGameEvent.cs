@@ -35,7 +35,6 @@ public static class RandomGameEvent
     // Method to initialize the status descriptions
     public static void InitializeDescriptions()
     {
-        
         randomStatusDescriptions[RandomStatus.None] = "No status effects";
         randomStatusDescriptions[RandomStatus.Lesbian] = "Piece turns into a Queen";
         randomStatusDescriptions[RandomStatus.Convert] = "Bishop turns into a Knight";
