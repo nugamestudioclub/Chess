@@ -285,7 +285,7 @@ public class ChessPlayer : MonoBehaviour
                 //board.SetPiecePosition(board.GetPieceID(selectedLocation), pos);
 
                 var selPiece = board.GetPiece(selectedLocation);
-                
+
 
                 if (selPiece.statusManager.HasStatusType<NewHire>())
                 {
