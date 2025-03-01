@@ -29,6 +29,8 @@ public class SquareSelectorCreator : MonoBehaviour
             }
         }
 
+        StartCoroutine(Board.instance.SpawnPieces(delayBetweenSpawns));
+
         ChessPlayer.instance.canClick = true;
     }
 

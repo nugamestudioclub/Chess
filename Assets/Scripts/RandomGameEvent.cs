@@ -48,6 +48,7 @@ public static class RandomGameEvent
         redditComments.Add(new Lesbian());
         redditComments.Add(new  Spleef());
         redditComments.Add(new  NullStatus());
+        redditComments.Add(new Blessed());
     }
 
 

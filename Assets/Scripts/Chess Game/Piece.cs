@@ -20,7 +20,9 @@ public abstract class Piece : MonoBehaviour
     public ParticleSystem convertParticles;
     public ParticleSystem spleefParticles;
     public ParticleSystem nullParticles;
+    public ParticleSystem blessedParticles;
 
+    
     [Header("Mesh Renderer")]
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshFilter meshFilter;

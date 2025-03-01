@@ -69,7 +69,6 @@ public class Board : MonoBehaviour
 
         float delayBetweenSpawns = 0.01f;
         
-        StartCoroutine(SpawnPieces(delayBetweenSpawns));
         squareCreator.CreateSquareSelectors(this, delayBetweenSpawns);
 
         
@@ -77,7 +76,7 @@ public class Board : MonoBehaviour
         activeController = mainController;
     }
 
-    private IEnumerator SpawnPieces(float delayBetweenSpawns)
+    public IEnumerator SpawnPieces(float delayBetweenSpawns)
     {
         foreach (BoardLayout.BoardSquareSetup setup in layout.SetupArray)
         {
