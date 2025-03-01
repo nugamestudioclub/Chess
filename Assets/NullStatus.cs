@@ -12,6 +12,11 @@ public class NullStatus : ARedditComment
         return "Does nothing";
     }
 
+    public override int GetDuration()
+    {
+        return -1;
+    }
+
     public override void SaySomeDumbShit(Piece piece)
     {
         // nothing

@@ -39,6 +39,7 @@ public static class RandomGameEvent
         randomStatusDescriptions[RandomStatus.None] = "No status effects";
         randomStatusDescriptions[RandomStatus.Lesbian] = "Piece turns into a Queen";
         randomStatusDescriptions[RandomStatus.Convert] = "Bishop turns into a Knight";
+        randomStatusDescriptions[RandomStatus.Spleef] = "The next time this piece moves, it's square will fall away";
     }
     
     public static void InitializeRedditComments()
@@ -69,6 +70,7 @@ public static class RandomGameEvent
 
         redditComments[randomComment].SaySomeDumbShit(piece);
 
+        // change UI (NOT SUPPOSED TO BE HERE)
         ActiveEventUI.instance.SetActiveEventText(redditComments[randomComment].GetName(), redditComments[randomComment].GetDescription());
         // square selector position
 
@@ -91,5 +93,6 @@ public enum RandomStatus
 {
     None,
     Lesbian,
+    Spleef,
     Convert
 }

@@ -233,7 +233,6 @@ public class ChessPlayer : MonoBehaviour
             }
         }
     }
-
     private void HandleNewSelecection(Vector2Int pos)
     {
         Piece piece = board.GetPiece(pos);
@@ -253,6 +252,7 @@ public class ChessPlayer : MonoBehaviour
         Debug.Log("Handle new selection 253");
     }
 
+    // move the piece
     private void HandleCurrentlySelected(Vector2Int pos)
     {
         Piece current = board.GetPiece(selectedLocation);
@@ -294,6 +294,17 @@ public class ChessPlayer : MonoBehaviour
                         sentMove = potentialMoves[newMoveIndex];
                     }
                 }
+
+                if (selPiece.statuses.Contains(RandomStatus.Spleef)) {
+                    foreach (var sqr in ChessPlayer.instance.squares)
+                    {
+                        if (sqr.position == piece.Position)
+                        {
+                            sqr.gameObject.SetActive(false);
+                        }
+                    }
+                }
+
                 
                 RandomGameEvent.CallRandomEvent(selPiece);
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
