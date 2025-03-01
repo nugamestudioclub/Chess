@@ -21,12 +21,15 @@ public class PieceManager : MonoBehaviour
             return;
         }
 
+        
         string displayText = this.hoveredPiece.pieceType + " (" + this.hoveredPiece.teamColor + ")\n\n"
                              + "Status Effects: ";
+        /*
         foreach (StatusEffect statusEffect in this.hoveredPiece.statuses)
         {
             displayText = displayText + statusEffect.ToString() + "\n";
         }
+        */
 
         displayText = displayText + hoveredPiece.status + "\n" + "Description: " +
                       RandomGameEvent.GetDescription(hoveredPiece.status);

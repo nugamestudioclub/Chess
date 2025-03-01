@@ -9,7 +9,12 @@ public class Convert : ARedditComment
 
     public override string GetDescription()
     {
-        return "A bishop on your side converts to a knight";
+        return "A bishop on your side converts to a knight, active until another bishop is encountered";
+    }
+
+    public override int GetDuration()
+    {
+        return -1;
     }
 
     public override void SaySomeDumbShit(Piece piece)
