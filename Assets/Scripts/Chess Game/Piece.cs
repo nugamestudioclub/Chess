@@ -4,20 +4,34 @@ using UnityEngine;
 
 public abstract class Piece : MonoBehaviour
 {
+    [Header("Piece Info")]
     public PieceType pieceType = PieceType.Pawn;
-    public Vector2Int Position { get; private set; }
+    [HideInInspector] public Vector2Int Position { get; private set; }
 
     public TeamColor teamColor;
 
-    public bool hasMoved = false;
-    public bool selected = false;
-    public bool hovered = false;
+    [HideInInspector] public bool hasMoved = false;
+    [HideInInspector] public bool selected = false;
+    [HideInInspector] public bool hovered = false;
 
+    [Header("Particles")]
     public ParticleSystem effectParticles;
     public ParticleSystem warpParticles;
     public ParticleSystem convertParticles;
     public ParticleSystem spleefParticles;
+    public ParticleSystem nullParticles;
 
+    [Header("Mesh Renderer")]
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private MeshFilter meshFilter;
+
+    [Header("Piece Materials")]
+    [SerializeField] private Material whitePieceMaterial;
+    [SerializeField] private Material blackPieceMaterial;
+
+    public List<RankToMesh> rankToMeshes = new List<RankToMesh>();
+
+    
     public StatusAcceptor statusManager = new();
     // public List<StatusEffect> statuses => statusManager.ToList();
 
@@ -144,14 +158,6 @@ public abstract class Piece : MonoBehaviour
 
         moves.Add(move);
     }
-
-    [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private MeshFilter meshFilter;
-
-    [SerializeField] private Material whitePieceMaterial;
-    [SerializeField] private Material blackPieceMaterial;
-
-    public List<RankToMesh> rankToMeshes = new List<RankToMesh>();
 
     private void OnEnable()
     {

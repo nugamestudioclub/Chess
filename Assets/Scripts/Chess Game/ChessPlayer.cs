@@ -42,6 +42,10 @@ public class ChessPlayer : MonoBehaviour
         board = Board.instance;
 // thing
         mainCam = Camera.main;
+
+        RandomGameEvent.InitializeRedditComments();
+        RandomGameEvent.SetNextRandomEvent();
+        ActiveEventUI.instance.SetActiveEventText(RandomGameEvent.redditComments[RandomGameEvent.nextRandomEventIndex].GetName(), RandomGameEvent.redditComments[RandomGameEvent.nextRandomEventIndex].GetDescription());
     }
 
     private void Update()
@@ -308,7 +312,7 @@ public class ChessPlayer : MonoBehaviour
                 RandomGameEvent.CallRandomEvent(selPiece, RandomGameEvent.nextRandomEventIndex);
                 board.SendMove(teamColor, board.GetPiece(selectedLocation), sentMove, this);
 
-                RandomGameEvent.GetNextRandomEvent();
+                RandomGameEvent.SetNextRandomEvent();
                 ActiveEventUI.instance.SetActiveEventText(RandomGameEvent.redditComments[RandomGameEvent.nextRandomEventIndex].GetName(), RandomGameEvent.redditComments[RandomGameEvent.nextRandomEventIndex].GetDescription());
 
                 //RandomGameEvent.GetRandomStatus();

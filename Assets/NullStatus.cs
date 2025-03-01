@@ -19,6 +19,6 @@ public class NullStatus : ARedditComment
 
     public override void SaySomeDumbShit(Piece piece)
     {
-        // nothing
+        piece.nullParticles.Play();
     }
 }

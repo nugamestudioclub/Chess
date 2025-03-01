@@ -86,10 +86,9 @@ public static class RandomGameEvent
 
 
     // Call a random event for a piece
-    public static int GetNextRandomEvent()
+    public static void SetNextRandomEvent()
     {
         nextRandomEventIndex = Random.Range(0, redditComments.Count);
-        return nextRandomEventIndex;
     }
 
 
