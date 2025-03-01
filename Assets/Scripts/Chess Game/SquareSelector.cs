@@ -9,6 +9,9 @@ public class SquareSelector : MonoBehaviour
     public GameObject moveTileIndicator;
     public GameObject capturableTileIndicator;
 
+    public MeshRenderer tileMeshRenderer;
+    public ParticleSystem spleefParticles;
+    
     public void ToggleMoveTileIndicator(bool enabled)
     {
         moveTileIndicator.SetActive(enabled);

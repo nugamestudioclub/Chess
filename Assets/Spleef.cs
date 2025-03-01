@@ -27,10 +27,14 @@ public class Spleef : ARedditComment
         {
             if (sqr.position == piece.Position)
             {
+                sqr.spleefParticles.name = "SPLEEF: " + sqr.spleefParticles.transform.parent.name;
+                sqr.spleefParticles.transform.parent = null;
+                sqr.spleefParticles.GetComponent<ParticleSystemRenderer>().material = sqr.tileMeshRenderer.material;
+                sqr.spleefParticles.Play();
                 sqr.gameObject.SetActive(false);
             }
         }
-        PlayEffectParticles(piece);
+        piece.spleefParticles.Play();
         piece.status = RandomStatus.Spleef;
     }
 }

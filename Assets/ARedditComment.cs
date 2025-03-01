@@ -10,8 +10,4 @@ public abstract class ARedditComment
 
     public abstract void SaySomeDumbShit(Piece piece);
 
-    public virtual void PlayEffectParticles(Piece piece)
-    {
-        piece.effectParticles.Play();
-    }
 }

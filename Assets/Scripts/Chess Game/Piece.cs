@@ -14,6 +14,10 @@ public abstract class Piece : MonoBehaviour
     public bool hovered = false;
 
     public ParticleSystem effectParticles;
+    public ParticleSystem warpParticles;
+    public ParticleSystem convertParticles;
+    public ParticleSystem spleefParticles;
+
     public StatusAcceptor statusManager = new();
     // public List<StatusEffect> statuses => statusManager.ToList();
 
