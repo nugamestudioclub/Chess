@@ -67,17 +67,25 @@ public class Board : MonoBehaviour
         pieceIDGrid = Enumerable.Repeat(EMPTY_SPACE, Width * Height).ToList();
         pieces = new List<Piece>();
 
-        foreach (BoardLayout.BoardSquareSetup setup in layout.SetupArray)
-        {
-            AddPiece(setup.pieceType, setup.position - new Vector2Int(1, 1), setup.teamColor);
-        }
+        float delayBetweenSpawns = 0.01f;
+        
+        StartCoroutine(SpawnPieces(delayBetweenSpawns));
+        squareCreator.CreateSquareSelectors(this, delayBetweenSpawns);
 
-        squareCreator.CreateSquareSelectors(this);
-
+        
         mainController = new ChessController(this);
         activeController = mainController;
     }
 
+    private IEnumerator SpawnPieces(float delayBetweenSpawns)
+    {
+        foreach (BoardLayout.BoardSquareSetup setup in layout.SetupArray)
+        {
+            AddPiece(setup.pieceType, setup.position - new Vector2Int(1, 1), setup.teamColor);
+            yield return new WaitForSeconds(delayBetweenSpawns);
+        }
+    }
+    
     public void UpdateGame()
     {
         activeController.UpdateGame();

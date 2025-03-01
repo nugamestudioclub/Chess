@@ -10,12 +10,12 @@ public class SquareSelectorCreator : MonoBehaviour
     [SerializeField] private Material blackMaterial;
     private int counter = 0;
 
-    public void CreateSquareSelectors(Board board)
+    public void CreateSquareSelectors(Board board, float delayBetweenSpawns)
     {
-        StartCoroutine(CreateSquareDelay(board));
+        StartCoroutine(CreateSquareDelay(board, delayBetweenSpawns));
     }
 
-    private IEnumerator CreateSquareDelay(Board board)
+    private IEnumerator CreateSquareDelay(Board board, float delayBetweenSpawns)
     {
         for (int x = 0; x < board.Width; x++)
         {
@@ -23,7 +23,9 @@ public class SquareSelectorCreator : MonoBehaviour
             {
                 counter++;
                 CreateSquareSelector(board, new Vector2Int(x, y));
-                yield return new WaitForSeconds(0.01f);
+                
+
+                yield return new WaitForSeconds(delayBetweenSpawns);
             }
         }
 
