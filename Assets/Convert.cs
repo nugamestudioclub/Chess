@@ -17,27 +17,27 @@ public class Convert : ARedditComment
         int count = 0;
         foreach (Piece p in Board.instance.Pieces)
         {
-            if (piece.teamColor == p.teamColor && p.pieceType == PieceType.Bishop)
+            
+            if (p != null && p.pieceType == PieceType.Bishop)
             {
                 count++;
             }
         }
 
-        if (count <= 0)
+        if (count > 0)
         {
-            return;
+            foreach (Piece p in Board.instance.Pieces)
+            {
+                if (piece.teamColor == p.teamColor && p.pieceType == PieceType.Bishop)
+                {
+                    p.status = RandomStatus.Convert;
+                    p.pieceType = PieceType.Knight;
+                    p.UpdateVisual();
+                    return;
+                }
+            }
+            
         }
         
-        foreach (Piece p in Board.instance.Pieces)
-        {
-            if (piece.teamColor == p.teamColor && p.pieceType == PieceType.Bishop)
-            {
-                p.status = RandomStatus.Convert;
-                p.pieceType = PieceType.Knight;
-                p.UpdateVisual();
-                return;
-            }
-        }
-
     }
 }
