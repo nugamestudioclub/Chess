@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,8 @@ public static class RandomGameEvent
         redditComments.Add(new  Spleef());
         redditComments.Add(new  NullStatus());
         redditComments.Add(new Blessed());
+                redditComments.Add(new RUOK());
+
     }
 
 
@@ -66,6 +69,7 @@ public static class RandomGameEvent
             InitializeRedditComments();
         }
 
+GlobalURPVolumeManager.Instance.SetProfileToDefault();
 
         redditComments[randomComment].SaySomeDumbShit(piece);
         // change UI (NOT SUPPOSED TO BE HERE)

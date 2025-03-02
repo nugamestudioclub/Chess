@@ -45,7 +45,7 @@ public class SquareSelectorCreator : MonoBehaviour
 
         //collider.size = new Vector3(size.x, size.y, size.z);
 
-        selector.transform.localScale = new Vector3(size.x, .05f, size.z);
+        selector.transform.localScale = new Vector3(size.x, 0.1f, size.z);
 
         var square = selector.GetComponent<SquareSelector>();
 
