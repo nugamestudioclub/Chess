@@ -21,6 +21,7 @@ public abstract class Piece : MonoBehaviour
     public ParticleSystem spleefParticles;
     public ParticleSystem nullParticles;
     public ParticleSystem blessedParticles;
+    public ParticleSystem killParticles;
 
     
     [Header("Mesh Renderer")]

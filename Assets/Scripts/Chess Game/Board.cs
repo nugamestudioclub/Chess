@@ -152,9 +152,23 @@ public class Board : MonoBehaviour
     public void RemovePiece(Vector2Int position)
     {
         int id = GetPieceID(position);
-        Destroy(pieces[id].gameObject);
-        pieces[id] = null;
+        if (id == EMPTY_SPACE || id < 0 || id >= pieces.Count)
+        {
+            Debug.LogWarning($"Tried to remove a piece at {position}, but no valid piece found.");
+            return;
+        }
+
+        if (pieces[id] != null && pieces[id].gameObject != null)
+        {
+            Destroy(pieces[id].gameObject);
+            pieces[id] = null;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to remove a null piece");
+        }
     }
+
 
     public Piece GetPiece(Vector2Int position)
     {
@@ -165,12 +179,27 @@ public class Board : MonoBehaviour
     public bool HasPiece(Vector2Int position) => GetPieceID(position) != EMPTY_SPACE;
 
     private void SetPieceGridID(int id, Vector2Int position) => pieceIDGrid[GetFlat(position)] = id;
-
+    
     public int GetPieceID(Vector2Int position)
     {
-        return pieceIDGrid[GetFlat(position)];
+        if (!ContainsPosition(position))
+        {
+            Debug.LogWarning($"GetPieceID: Position {position} is out of bounds.");
+            return EMPTY_SPACE; // Return -1 to indicate an invalid piece
+        }
+
+        int index = GetFlat(position);
+    
+        if (index < 0 || index >= pieceIDGrid.Count)
+        {
+            Debug.LogError($"GetPieceID: Computed index {index} is out of range.");
+            return EMPTY_SPACE;
+        }
+
+        return pieceIDGrid[index];
     }
 
+    
     public int GetFlat(Vector2Int position) => position.x + (position.y * Width);
 
     public Vector2Int Get2D(int location) => new Vector2Int(location % Width, location / Width);
