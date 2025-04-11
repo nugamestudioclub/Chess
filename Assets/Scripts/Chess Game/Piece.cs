@@ -158,11 +158,6 @@ public abstract class Piece : MonoBehaviour
         UpdateVisual();
     }
 
-    private void OnValidate()
-    {
-        UpdateVisual();
-    }
-
     public void UpdateVisual()
     {
         switch (teamColor)
