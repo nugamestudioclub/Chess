@@ -3,7 +3,7 @@ using UnityEngine;
 public class Spleef : ARedditComment
 {
 
-    public int duration = 3; 
+    public int duration = 1; 
 
     public override string GetName()
     {

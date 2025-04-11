@@ -47,11 +47,11 @@ public static class RandomGameEvent
         redditComments.Clear();
         redditComments.Add(new Convert());
         redditComments.Add(new Lesbian());
-        redditComments.Add(new  Spleef());
-        redditComments.Add(new  NullStatus());
+        redditComments.Add(new Spleef());
+        redditComments.Add(new NullStatus());
         redditComments.Add(new Blessed());
-                redditComments.Add(new RUOK());
-
+        redditComments.Add(new RUOK());
+        redditComments.Add(new GoogleEnPassant());
     }
 
 
@@ -69,7 +69,7 @@ public static class RandomGameEvent
             InitializeRedditComments();
         }
 
-GlobalURPVolumeManager.Instance.SetProfileToDefault();
+        GlobalURPVolumeManager.Instance.SetProfileToDefault();
 
         redditComments[randomComment].SaySomeDumbShit(piece);
         // change UI (NOT SUPPOSED TO BE HERE)
@@ -95,9 +95,6 @@ GlobalURPVolumeManager.Instance.SetProfileToDefault();
     {
         nextRandomEventIndex = Random.Range(0, redditComments.Count);
     }
-
-
-
 
 }
 
