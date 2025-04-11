@@ -15,7 +15,6 @@ public class ChessCameraController : MonoBehaviour
     private Vector3 startingPosition;
     private Quaternion startingRotation;
 
-    private bool reset = true;
 
     private bool atStartingPoint = true;
 
@@ -56,7 +55,6 @@ public class ChessCameraController : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             atStartingPoint = false;
-            reset = false;
             yaw += Input.GetAxis("Mouse X") * rotationSpeed;
             pitch -= Input.GetAxis("Mouse Y") * rotationSpeed;
             pitch = Mathf.Clamp(pitch, -30f, 60f);
@@ -88,6 +86,5 @@ public class ChessCameraController : MonoBehaviour
         yaw = startingRotation.eulerAngles.y;
         pitch = startingRotation.eulerAngles.x;
         currentZoom = (startingPosition - target.position).magnitude;
-        reset = false;
     }
 }
