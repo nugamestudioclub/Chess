@@ -54,11 +54,18 @@ public abstract class Piece : MonoBehaviour
         return moves;
     }
 
+    private void Start()
+    {
+        if (meshRenderer == null)
+        {
+            meshRenderer = GetComponent<MeshRenderer>();
+        }
+    }
+
 
     private void Update()
     {
         Debug.Log("Rotation: " + transform.rotation + " name: " + gameObject.name);
-        Renderer meshRenderer = GetComponent<Renderer>();
         if (meshRenderer != null)
         {
             if (this.hovered)
