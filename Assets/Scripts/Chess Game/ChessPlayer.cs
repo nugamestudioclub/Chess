@@ -286,19 +286,6 @@ public class ChessPlayer : MonoBehaviour
 
                 var selPiece = board.GetPiece(selectedLocation);
 
-
-                if (selPiece.statusManager.HasStatusType<NewHire>())
-                {
-                    Debug.Log("moved piece with nh");
-                    var rand = new System.Random();
-
-                    if (rand.NextDouble() > 0 /*0.5f*/)
-                    {
-                        int newMoveIndex = rand.Next(potentialMoves.Count);
-                        sentMove = potentialMoves[newMoveIndex];
-                    }
-                }
-
                 if (selPiece.statuses.Contains(RandomStatus.Spleef)) {
                     foreach (var sqr in ChessPlayer.instance.squares)
                     {
