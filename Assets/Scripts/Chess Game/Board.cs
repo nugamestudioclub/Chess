@@ -40,7 +40,6 @@ public class Board : MonoBehaviour
 
     public void Start()
     {
-        eventManager.board = this;
         StartGame();
     }
 
@@ -56,8 +55,6 @@ public class Board : MonoBehaviour
 
     ChessController mainController;
     ChessController activeController;
-
-    public EventManager eventManager;
 
     public TeamColor activePlayer = TeamColor.White;
     public bool gameOver = false;
@@ -85,10 +82,6 @@ public class Board : MonoBehaviour
         }
     }
     
-    public void UpdateGame()
-    {
-        activeController.UpdateGame();
-    }
 
     // returns whether or not move was made
     public bool SendMove(TeamColor tc, Piece piece, ChessMove move, ChessPlayer sender = null)

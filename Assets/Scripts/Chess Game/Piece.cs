@@ -35,7 +35,6 @@ public abstract class Piece : MonoBehaviour
     public List<RankToMesh> rankToMeshes = new List<RankToMesh>();
 
     
-    public StatusAcceptor statusManager = new();
     // public List<StatusEffect> statuses => statusManager.ToList();
 
     [HideInInspector] public RandomStatus status = RandomStatus.None;
@@ -51,16 +50,10 @@ public abstract class Piece : MonoBehaviour
     {
         var moves = GetDefaultMoves(board);
 
-        statusManager.ApplyModifyMoves((effect) => effect.Props.ModifyMoves(effect, moves));
 
         return moves;
     }
 
-    public virtual void GameUpdate()
-    {
-        statusManager.ApplyOnGameUpdate((effect) => effect.Props.OnGameUpdate(effect, this));
-        return;
-    }
 
     private void Update()
     {
@@ -88,8 +81,6 @@ public abstract class Piece : MonoBehaviour
             }
         }
 
-
-        statusManager.ApplyOnUpdate((effect) => effect.Props.OnUpdate(effect, this));
     }
 
     public static void AppendLine(Vector2Int pos, Vector2Int diagonal, int step, List<ChessMove> moves, Board board,

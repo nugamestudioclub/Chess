@@ -24,17 +24,7 @@ public class ChessController
         get => board.gameOver;
         set => board.SetGameOver(value);
     }
-
-    public void UpdateGame()
-    {
-        foreach (Piece piece in pieces)
-        {
-            if (piece != null)
-            {
-                piece.GameUpdate();
-            }
-        }
-    }
+    
 
     // returns whether or not move was made
     public bool SendMove(TeamColor tc, Piece piece, ChessMove move, ChessPlayer sender = null)
@@ -48,7 +38,7 @@ public class ChessController
         Debug.Log(tc + " " + activePlayer);
 
         board.SetPiecePosition(board.GetPieceID(piece.Position), move.destination);
-        piece.statusManager.ApplyOnPieceMove((effect) => effect.Props.OnPieceMove(effect, piece, move));
+
 
         piece.hasMoved = true;
 
@@ -63,25 +53,6 @@ public class ChessController
 
         board.StartCoroutine(board.FlipBoard());
 
-        // apply any event
-
-        int eventMove = activePlayer == TeamColor.White
-            ? board.eventManager.WhiteNextEvent
-            : board.eventManager.BlackNextEvent;
-
-        Debug.Log(eventMove);
-        Debug.Log(board.NumMoves);
-        if (eventMove <= board.NumMoves)
-        {
-            if (activePlayer == TeamColor.White)
-            {
-                board.eventManager.SetNextWhiteEvent();
-            }
-            else
-            {
-                board.eventManager.SetNextBlackEvent();
-            }
-        }
 
         //
 
@@ -91,7 +62,6 @@ public class ChessController
         }
 
         activePlayer = activePlayer == TeamColor.White ? TeamColor.Black : TeamColor.White;
-        UpdateGame();
         return true;
     }
 
