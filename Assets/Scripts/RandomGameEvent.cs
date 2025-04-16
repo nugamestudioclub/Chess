@@ -52,6 +52,7 @@ public static class RandomGameEvent
         redditComments.Add(new Blessed());
         redditComments.Add(new RUOK());
         redditComments.Add(new GoogleEnPassant());
+        redditComments.Add(new Insanity());
     }
 
 

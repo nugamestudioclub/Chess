@@ -39,7 +39,6 @@ public class ChessController
 
         board.SetPiecePosition(board.GetPieceID(piece.Position), move.destination);
 
-
         piece.hasMoved = true;
 
         // if piece captured king

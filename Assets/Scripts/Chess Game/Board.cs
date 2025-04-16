@@ -202,6 +202,7 @@ public class Board : MonoBehaviour
         if (position.x < 0 || position.x >= Width)
         {
             return false;
+            // add holes
         }
 
         if (position.y < 0 || position.y >= Height)

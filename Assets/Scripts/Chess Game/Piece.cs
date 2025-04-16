@@ -127,7 +127,7 @@ public abstract class Piece : MonoBehaviour
 
         path.Add(checkPos);
 
-        if (piece == null)
+        if (piece == null && board.ContainsPosition(checkPos))
         {
             DoAppendLine(checkPos, diagonal, step, moves, board, path, origin, teamColor);
         }
